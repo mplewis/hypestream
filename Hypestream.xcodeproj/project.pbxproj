@@ -77,9 +77,10 @@
 		360990CF19F1A736004BC4AF /* Hypestream */ = {
 			isa = PBXGroup;
 			children = (
-				360990D219F1A736004BC4AF /* AppDelegate.swift */,
-				360990D419F1A736004BC4AF /* ViewController.swift */,
-				360990D619F1A736004BC4AF /* Main.storyboard */,
+				3609914C19F1AAB1004BC4AF /* App Delegate */,
+				3609914B19F1AAAF004BC4AF /* Models */,
+				3609914A19F1AAA9004BC4AF /* Views */,
+				3609914919F1AAA1004BC4AF /* Controllers */,
 				360990D919F1A736004BC4AF /* Images.xcassets */,
 				360990DB19F1A736004BC4AF /* LaunchScreen.xib */,
 				360990D019F1A736004BC4AF /* Supporting Files */,
@@ -110,6 +111,37 @@
 				360990E719F1A736004BC4AF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3609914919F1AAA1004BC4AF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				360990D419F1A736004BC4AF /* ViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		3609914A19F1AAA9004BC4AF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				360990D619F1A736004BC4AF /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		3609914B19F1AAAF004BC4AF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3609914C19F1AAB1004BC4AF /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				360990D219F1A736004BC4AF /* AppDelegate.swift */,
+			);
+			name = "App Delegate";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +437,7 @@
 				360990EE19F1A736004BC4AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		360990EF19F1A736004BC4AF /* Build configuration list for PBXNativeTarget "HypestreamTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +446,7 @@
 				360990F119F1A736004BC4AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
