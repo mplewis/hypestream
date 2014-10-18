@@ -33,8 +33,15 @@ class ViewController: UIViewController {
                 return
             }
             if let tracks = data as? Dictionary<String, AnyObject> {
+                var maxIndex = 0;
+                for key in tracks.keys {
+                    let keyInt = key.toInt()
+                    if (keyInt != nil && keyInt > maxIndex) {
+                            maxIndex = keyInt!
+                    }
+                }
                 var output = ""
-                for index in 0...9 {
+                for index in 0...maxIndex {
                     if let track: AnyObject = tracks[String(index)] {
                         let artist = track["artist"]
                         let title = track["title"]
