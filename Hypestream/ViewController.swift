@@ -33,13 +33,23 @@ class ViewController: UIViewController {
                 return
             }
             if let tracks = data as? Dictionary<String, AnyObject> {
+                var output = ""
                 for index in 0...9 {
                     if let track: AnyObject = tracks[String(index)] {
-                        println("\(track)")
+                        let artist = track["artist"]
+                        let title = track["title"]
+                        if (artist != nil && title != nil) {
+                            let a: AnyObject? = artist
+                            let t: AnyObject? = title
+                            output += "\(index): \(a!) - \(t!)\n"
+                        } else {
+                            println("Couldn't get artist or title for \(index)")
+                        }
                     } else {
                         println("Couldn't get track from String(\(index))")
                     }
                 }
+                self.outputView.text = output
             } else {
                 println("Couldn't cast data to Dictionary<Int, AnyObject>")
             }
