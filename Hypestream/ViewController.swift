@@ -42,7 +42,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBAction func refreshFeed(AnyObject) {
         let queue = NSOperationQueue.mainQueue()
-        let homeUrl = NSURL(string: "http://hypem-com-sy61nts0plpb.runscope.net/popular/1")
+        let homeUrl = NSURL(string: "http://hypem.com/popular/1")
         
         NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: homeUrl), queue: queue) { (response, htmlData, error) in
             let htmlString = NSString(data: htmlData, encoding: NSUTF8StringEncoding)
@@ -65,7 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let artist = track["artist"]
                     let title = track["song"]
 
-                    let mediaUrl = NSURL(string: "http://hypem-com-sy61nts0plpb.runscope.net/serve/source/\(id)/\(key)")
+                    let mediaUrl = NSURL(string: "hypem.com/serve/source/\(id)/\(key)")
                     let mediaRequest = NSMutableURLRequest(URL: mediaUrl)
                     mediaRequest.HTTPMethod = "POST"
                     
