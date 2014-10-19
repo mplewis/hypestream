@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var outputView: UITextView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.refreshFeed("")
+    }
 
     @IBAction func refreshFeed(AnyObject) {
         outputView.text = "Loading..."
