@@ -13,6 +13,7 @@
 		360990DA19F1A736004BC4AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 360990D919F1A736004BC4AF /* Images.xcassets */; };
 		360990DD19F1A736004BC4AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 360990DB19F1A736004BC4AF /* LaunchScreen.xib */; };
 		360990E919F1A736004BC4AF /* HypestreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360990E819F1A736004BC4AF /* HypestreamTests.swift */; };
+		3651ED9519F43B9C00F94C28 /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3651ED9419F43B9C00F94C28 /* json.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		360990E219F1A736004BC4AF /* HypestreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HypestreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		360990E719F1A736004BC4AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		360990E819F1A736004BC4AF /* HypestreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypestreamTests.swift; sourceTree = "<group>"; };
+		3651ED9419F43B9C00F94C28 /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				3609914919F1AAA1004BC4AF /* Controllers */,
 				360990D919F1A736004BC4AF /* Images.xcassets */,
 				360990DB19F1A736004BC4AF /* LaunchScreen.xib */,
+				3651ED9319F43B8F00F94C28 /* Vendor */,
 				360990D019F1A736004BC4AF /* Supporting Files */,
 			);
 			path = Hypestream;
@@ -142,6 +145,14 @@
 				360990D219F1A736004BC4AF /* AppDelegate.swift */,
 			);
 			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		3651ED9319F43B8F00F94C28 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				3651ED9419F43B9C00F94C28 /* json.swift */,
+			);
+			name = Vendor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +257,7 @@
 			files = (
 				360990D519F1A736004BC4AF /* ViewController.swift in Sources */,
 				360990D319F1A736004BC4AF /* AppDelegate.swift in Sources */,
+				3651ED9519F43B9C00F94C28 /* json.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
