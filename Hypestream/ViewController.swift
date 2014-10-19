@@ -8,16 +8,39 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    @IBOutlet weak var outputView: UITextView!
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
+
+    var tracks: [JSON] = [JSON]() {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshFeed("")
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tracks.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("SongCell") as UITableViewCell
+        let track = tracks[indexPath.row]
+        let artist = track["artist"].asString
+        let title = track["song"].asString
+        cell.textLabel!.text = title
+        cell.detailTextLabel!.text = artist
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        
+    }
 
     @IBAction func refreshFeed(AnyObject) {
-        outputView.text = "Loading..."
         let queue = NSOperationQueue.mainQueue()
         let homeUrl = NSURL(string: "http://hypem-com-sy61nts0plpb.runscope.net/popular/1")
         
@@ -33,7 +56,9 @@ class ViewController: UIViewController {
                     println("Couldn't load tracks")
                     return
                 }
-                var output = ""
+
+                self.tracks = tracks!
+
                 for track in tracks! {
                     let id = track["id"]
                     let key = track["key"]
@@ -50,10 +75,7 @@ class ViewController: UIViewController {
                         let streamUrl = jsonData["url"]
                         println("\(artist) - \(title): \(streamUrl)")
                     }
-                    
-                    output += "\(artist) - \(title)\n"
                 }
-                self.outputView.text = output
             } else {
                 println("Failure on splitting start")
             }
