@@ -15,8 +15,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         return true
+    }
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        println("Fetching in background...")
+        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: sessionConfig)
+        let homeUrl = NSURL(string: "http://hypem.com/popular/1")
+        let task = session.dataTaskWithURL(homeUrl, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                println("Fetch failed.")
+                completionHandler(UIBackgroundFetchResult.Failed)
+            } else {
+                println("Fetch successful.")
+                completionHandler(UIBackgroundFetchResult.NewData)
+            }
+        })
+        task.resume()
     }
 
     func applicationWillResignActive(application: UIApplication) {
