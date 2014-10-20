@@ -84,7 +84,6 @@
 				3609914A19F1AAA9004BC4AF /* Views */,
 				3609914919F1AAA1004BC4AF /* Controllers */,
 				360990D919F1A736004BC4AF /* Images.xcassets */,
-				360990DB19F1A736004BC4AF /* LaunchScreen.xib */,
 				3651ED9319F43B8F00F94C28 /* Vendor */,
 				360990D019F1A736004BC4AF /* Supporting Files */,
 			);
@@ -96,7 +95,7 @@
 			children = (
 				360990D119F1A736004BC4AF /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		360990E519F1A736004BC4AF /* HypestreamTests */ = {
@@ -113,7 +112,7 @@
 			children = (
 				360990E719F1A736004BC4AF /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		3609914919F1AAA1004BC4AF /* Controllers */ = {
@@ -121,22 +120,23 @@
 			children = (
 				360990D419F1A736004BC4AF /* ViewController.swift */,
 			);
-			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		3609914A19F1AAA9004BC4AF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				360990DB19F1A736004BC4AF /* LaunchScreen.xib */,
 				360990D619F1A736004BC4AF /* Main.storyboard */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3609914B19F1AAAF004BC4AF /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		3609914C19F1AAB1004BC4AF /* App Delegate */ = {
@@ -144,7 +144,7 @@
 			children = (
 				360990D219F1A736004BC4AF /* AppDelegate.swift */,
 			);
-			name = "App Delegate";
+			path = "App Delegate";
 			sourceTree = "<group>";
 		};
 		3651ED9319F43B8F00F94C28 /* Vendor */ = {
@@ -152,7 +152,7 @@
 			children = (
 				3651ED9419F43B9C00F94C28 /* json.swift */,
 			);
-			name = Vendor;
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,7 +385,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Hypestream/Info.plist;
+				INFOPLIST_FILE = "Hypestream/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -395,7 +395,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Hypestream/Info.plist;
+				INFOPLIST_FILE = "Hypestream/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -413,7 +413,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = HypestreamTests/Info.plist;
+				INFOPLIST_FILE = "HypestreamTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hypestream.app/Hypestream";
@@ -428,7 +428,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = HypestreamTests/Info.plist;
+				INFOPLIST_FILE = "HypestreamTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hypestream.app/Hypestream";
