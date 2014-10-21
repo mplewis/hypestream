@@ -15,6 +15,7 @@
 		360990E919F1A736004BC4AF /* HypestreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360990E819F1A736004BC4AF /* HypestreamTests.swift */; };
 		3651ED9519F43B9C00F94C28 /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3651ED9419F43B9C00F94C28 /* json.swift */; };
 		36D96B3119F6AE5700E2BB92 /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D96B3019F6AE5700E2BB92 /* Scraper.swift */; };
+		36D96B3319F6B40200E2BB92 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D96B3219F6B40200E2BB92 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		360990E819F1A736004BC4AF /* HypestreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypestreamTests.swift; sourceTree = "<group>"; };
 		3651ED9419F43B9C00F94C28 /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
 		36D96B3019F6AE5700E2BB92 /* Scraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scraper.swift; sourceTree = "<group>"; };
+		36D96B3219F6B40200E2BB92 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				36D96B3019F6AE5700E2BB92 /* Scraper.swift */,
+				36D96B3219F6B40200E2BB92 /* Helper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			files = (
 				36D96B3119F6AE5700E2BB92 /* Scraper.swift in Sources */,
 				360990D519F1A736004BC4AF /* ViewController.swift in Sources */,
+				36D96B3319F6B40200E2BB92 /* Helper.swift in Sources */,
 				360990D319F1A736004BC4AF /* AppDelegate.swift in Sources */,
 				3651ED9519F43B9C00F94C28 /* json.swift in Sources */,
 			);
