@@ -84,28 +84,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     @IBAction func refreshFeed(AnyObject) {
-        let homeUrl = NSURL(string: "http://hypem.com/popular/1")
-        
-        NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: homeUrl), queue: queue) { (response, htmlData, error) in
-            if (htmlData == nil) {
-                println("Couldn't scrape HTML from Hype Machine")
-                return
-            }
-            let htmlString = NSString(data: htmlData, encoding: NSUTF8StringEncoding)
-            let startScript = "<script type=\"application/json\" id=\"displayList-data\">"
-            let endScript = "</script>"
-            if let partial = htmlString.componentsSeparatedByString(startScript)[1] as? String {
-                let script = partial.componentsSeparatedByString(endScript)[0]
-                let scriptJson = JSON(string: script)
-                let retrieved = scriptJson["tracks"].asArray
-                if (retrieved == nil) {
-                    println("Couldn't load tracks")
-                    return
-                }
-
-                self.tracks = retrieved!
+        Scraper.getPopularTracks { (tracks, error) -> Void in
+            if let errorReturned = error {
+                println(error)
+            } else if let tracksReturned = tracks {
+                self.tracks = tracksReturned
             } else {
-                println("Failure on splitting start")
+                println("Error: No tracks or error returned from Scraper.getPopularTracks")
             }
         }
     }
