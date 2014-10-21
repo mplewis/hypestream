@@ -41,30 +41,37 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let track = tracks[indexPath.row]
-        let id = track["id"]
-        let key = track["key"]
-        let artist = track["artist"]
-        let title = track["song"]
+        let idOp = track["id"].asString
+        let keyOp = track["key"].asString
+        let artistOp = track["artist"].asString
+        let titleOp = track["song"].asString
         
-        let mediaUrl = NSURL(string: "http://hypem.com/serve/source/\(id)/\(key)")
-        let mediaRequest = NSMutableURLRequest(URL: mediaUrl)
-        mediaRequest.HTTPMethod = "POST"
-        
-        NSURLConnection.sendAsynchronousRequest(mediaRequest, queue: queue) { (response, jsonData, error) in
-            if (jsonData == nil) {
-                println("Couldn't retrieve stream URL for \(artist) - \(title)")
-                return
-            }
-            let jsonString: String = NSString(data: jsonData, encoding: NSUTF8StringEncoding)
-            let jsonData = JSON(string: jsonString)
-            if let streamUrlString = jsonData["url"].asString {
-                println("Retrieving track from \(streamUrlString)")
+        if (idOp == nil || keyOp == nil) {
+            println("Missing ID or key for \(track)")
+            return
+        }
 
+        if (artistOp == nil || titleOp == nil) {
+            println("Missing artist or title for \(track)")
+            return
+        }
+        
+        let id = idOp!
+        let key = keyOp!
+        let artist = artistOp!
+        let title = titleOp!
+
+        Scraper.getSourceURLForTrack(id, key: key) { (urlReturned, error) -> Void in
+            if let errorReturned = error {
+                println(errorReturned.localizedDescription)
+            } else if let streamUrlString = urlReturned {
+                println("Retrieving track from \(streamUrlString)")
+                
                 var error: NSError?
                 let streamUrl = NSURL(string: streamUrlString)
                 let trackData = NSData.dataWithContentsOfURL(streamUrl, options: nil, error: &error)
-                if (error != nil) {
-                    println(error!.localizedDescription)
+                if let errorNSData = error {
+                    println(errorNSData.localizedDescription)
                     return
                 }
                 
@@ -76,21 +83,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     println("Write failed for \(targetPath)")
                 }
             } else {
-                println("Couldn't get stream URL for \(artist) - \(title)")
-                return
+                println("Neither URL nor error returned from Scraper.getSourceURLForTrack")
             }
         }
+
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     @IBAction func refreshFeed(AnyObject) {
         Scraper.getPopularTracks { (tracks, error) -> Void in
             if let errorReturned = error {
-                println(error)
+                println(errorReturned.localizedDescription)
             } else if let tracksReturned = tracks {
                 self.tracks = tracksReturned
             } else {
-                println("Error: No tracks or error returned from Scraper.getPopularTracks")
+                println("No tracks or error returned from Scraper.getPopularTracks")
             }
         }
     }

@@ -37,4 +37,26 @@ class Scraper {
             }
         }
     }
+    
+    class func getSourceURLForTrack(id: String, key: String, callback: (url: String?, error: NSError?) -> Void) {
+        let mediaUrl = NSURL(string: "http://hypem.com/serve/source/\(id)/\(key)")
+        let mediaRequest = NSMutableURLRequest(URL: mediaUrl)
+        mediaRequest.HTTPMethod = "POST"
+        
+        NSURLConnection.sendAsynchronousRequest(mediaRequest, queue: queue) { (response, jsonData, error) in
+            let httpResponse = response as NSHTTPURLResponse
+            if (httpResponse.statusCode != 200) {
+                callback(url: nil, error: Helper.makeError("Got a non-200 status code: \(httpResponse.statusCode)", code: -201)); return
+            }
+            if (jsonData == nil) {
+                callback(url: nil, error: Helper.makeError("Couldn't retrieve stream URL", code: -202)); return
+            }
+            let jsonData = JSON(string: NSString(data: jsonData, encoding: NSUTF8StringEncoding))
+            if let streamUrlString = jsonData["url"].asString {
+                callback(url: streamUrlString, error: nil); return
+            } else {
+                callback(url: nil, error: Helper.makeError("Couldn't parse URL from response data", code: -203)); return
+            }
+        }
+    }
 }
