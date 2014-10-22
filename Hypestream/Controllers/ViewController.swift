@@ -16,10 +16,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.tableView.reloadData()
         }
     }
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.refreshFeed("")
+        
+        self.refreshControl.addTarget(self, action: Selector("refreshFeed"), forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(self.refreshControl)
+        
+        self.refreshFeed()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,8 +97,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
-    @IBAction func refreshFeed(AnyObject) {
+    func refreshFeed() {
         Scraper.getPopularTracks { (tracks, error) -> Void in
+            self.refreshControl.endRefreshing()
             if let errorReturned = error {
                 println(errorReturned.localizedDescription)
             } else if let tracksReturned = tracks {
