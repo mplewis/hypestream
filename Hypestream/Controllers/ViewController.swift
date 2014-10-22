@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let track = tracks[indexPath.row]
         let artist = track["artist"].asString
         let title = track["song"].asString
-        cell.textLabel!.text = title
+        cell.textLabel.text = title
         cell.detailTextLabel!.text = artist
         return cell
     }
@@ -68,8 +68,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 println("Retrieving track from \(streamUrlString)")
                 
                 var error: NSError?
-                let streamUrl = NSURL(string: streamUrlString)
-                let trackData = NSData.dataWithContentsOfURL(streamUrl, options: nil, error: &error)
+                let streamUrl = NSURL(string: streamUrlString)!
+                let trackDataOp = NSData(contentsOfURL:streamUrl)
+                if (trackDataOp == nil) {
+                    println("Couldn't load NSData with contentsOfURL: \(streamUrl)")
+                    return
+                }
+                let trackData = trackDataOp!
                 if let errorNSData = error {
                     println(errorNSData.localizedDescription)
                     return

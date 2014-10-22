@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: sessionConfig)
         let homeUrl = NSURL(string: "http://hypem.com/popular/1")
-        let task = session.dataTaskWithURL(homeUrl, completionHandler: { (data, response, error) -> Void in
+        let task = session.dataTaskWithURL(homeUrl!, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 println("Fetch failed.")
                 completionHandler(UIBackgroundFetchResult.Failed)
