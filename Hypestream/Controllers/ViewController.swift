@@ -8,9 +8,6 @@
 
 import UIKit
 
-let queue = NSOperationQueue.mainQueue()
-let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
 

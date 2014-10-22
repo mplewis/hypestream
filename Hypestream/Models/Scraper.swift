@@ -8,6 +8,9 @@
 
 import Foundation
 
+let queue = NSOperationQueue.mainQueue()
+let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+
 class Scraper {
     class func getPopularTracks(callback: (tracks: [JSON]?, error: NSError?) -> Void) {
         let homeUrl = NSURL(string: "http://hypem.com/popular/1")!
