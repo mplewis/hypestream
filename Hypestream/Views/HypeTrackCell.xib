@@ -11,7 +11,33 @@
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K6e-33-A8p" id="Asw-Wj-Fde">
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sd7-IZ-LAt">
+                        <rect key="frame" x="8" y="11" width="312" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSv-xr-Jzd">
+                        <rect key="frame" x="0.0" y="11" width="312" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="sd7-IZ-LAt" secondAttribute="trailing" id="Jdq-1I-VTO"/>
+                    <constraint firstAttribute="trailing" secondItem="zSv-xr-Jzd" secondAttribute="trailing" constant="8" id="N14-3w-V0v"/>
+                    <constraint firstAttribute="centerY" secondItem="zSv-xr-Jzd" secondAttribute="centerY" id="RFv-zg-gEb"/>
+                    <constraint firstItem="sd7-IZ-LAt" firstAttribute="leading" secondItem="Asw-Wj-Fde" secondAttribute="leading" constant="8" id="arl-mr-ZeA"/>
+                    <constraint firstItem="zSv-xr-Jzd" firstAttribute="leading" secondItem="Asw-Wj-Fde" secondAttribute="leading" id="ewU-MX-wXd"/>
+                    <constraint firstAttribute="centerY" secondItem="sd7-IZ-LAt" secondAttribute="centerY" id="hfm-Rf-3QU"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="artistLabel" destination="zSv-xr-Jzd" id="GK7-Xs-vQk"/>
+                <outlet property="titleLabel" destination="sd7-IZ-LAt" id="pKv-W8-KcS"/>
+            </connections>
             <point key="canvasLocation" x="516" y="377"/>
         </tableViewCell>
     </objects>
