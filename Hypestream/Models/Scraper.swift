@@ -9,19 +9,18 @@
 import Foundation
 
 let queue = NSOperationQueue.mainQueue()
-let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
 
 class Scraper {
-    class func getPopularTracks(callback: (tracks: [JSON]?, error: NSError?) -> Void) {
+    class func getPopularTracks(onTracks: ([JSON]) -> Void, onError: (NSError) -> Void) {
         let homeUrl = NSURL(string: "http://hypem.com/popular/1")!
         let bundleIdent = NSBundle.mainBundle().bundleIdentifier!
         
         NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: homeUrl), queue: queue) { (response, htmlData, error) in
             if (htmlData == nil) {
-                callback(tracks: nil, error: Helper.makeError("Couldn't scrape HTML from Hype Machine", code: -100)); return
+                onError(Helper.makeError("Couldn't scrape HTML from Hype Machine", code: -100)); return
             }
             if let givenError = error {
-                callback(tracks: nil, error: givenError); return
+                onError(givenError); return
             }
             
             let htmlString = NSString(data: htmlData, encoding: NSUTF8StringEncoding)!
@@ -31,17 +30,17 @@ class Scraper {
                 let script = partial.componentsSeparatedByString(endScript)[0]
                 let scriptJson = JSON(string: script)
                 if let retrieved = scriptJson["tracks"].asArray {
-                    callback(tracks: retrieved, error: nil); return
+                    onTracks(retrieved); return
                 } else {
-                    callback(tracks: nil, error: Helper.makeError("Couldn't load tracks from Hype Machine JSON", code: -101)); return
+                    onError(Helper.makeError("Couldn't load tracks from Hype Machine JSON", code: -101)); return
                 }
             } else {
-                callback(tracks: nil, error: Helper.makeError("Couldn't parse JSON from Hype Machine", code: -102)); return
+                onError(Helper.makeError("Couldn't parse JSON from Hype Machine", code: -102)); return
             }
         }
     }
     
-    class func getSourceURLForTrack(id: String, key: String, callback: (url: String?, error: NSError?) -> Void) {
+    class func getSourceURLForTrack(id: String, key: String, onURL: (String) -> Void, onError: (NSError) -> Void) {
         let mediaUrl = NSURL(string: "http://hypem.com/serve/source/\(id)/\(key)")!
         let mediaRequest = NSMutableURLRequest(URL: mediaUrl)
         mediaRequest.HTTPMethod = "POST"
@@ -49,22 +48,22 @@ class Scraper {
         NSURLConnection.sendAsynchronousRequest(mediaRequest, queue: queue) { (response, jsonData, error) in
             let httpResponseOp = response as? NSHTTPURLResponse
             if (httpResponseOp == nil) {
-                callback(url: nil, error: Helper.makeError("Got a nil HTTP response", code: -204)); return
+                onError(Helper.makeError("Got a nil HTTP response", code: -204)); return
             }
             let httpResponse = httpResponseOp!
 
             if (httpResponse.statusCode != 200) {
-                callback(url: nil, error: Helper.makeError("Got a non-200 status code: \(httpResponse.statusCode)", code: -201)); return
+                onError(Helper.makeError("Got a non-200 status code: \(httpResponse.statusCode)", code: -201)); return
             }
             if (jsonData == nil) {
-                callback(url: nil, error: Helper.makeError("Couldn't retrieve stream URL", code: -202)); return
+                onError(Helper.makeError("Couldn't retrieve stream URL", code: -202)); return
             }
             let jsonData = JSON(string: NSString(data: jsonData, encoding: NSUTF8StringEncoding)!)
 
             if let streamUrlString = jsonData["url"].asString {
-                callback(url: streamUrlString, error: nil); return
+                onURL(streamUrlString); return
             } else {
-                callback(url: nil, error: Helper.makeError("Couldn't parse URL from response data", code: -203)); return
+                onError(Helper.makeError("Couldn't parse URL from response data", code: -203)); return
             }
         }
     }

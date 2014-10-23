@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
@@ -63,50 +64,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let artist = artistOp!
         let title = titleOp!
 
-        Scraper.getSourceURLForTrack(id, key: key) { (urlReturned, error) -> Void in
-            if let errorReturned = error {
-                println(errorReturned.localizedDescription)
-            } else if let streamUrlString = urlReturned {
-                println("Retrieving track from \(streamUrlString)")
-                
-                var error: NSError?
-                let streamUrl = NSURL(string: streamUrlString)!
-                let trackDataOp = NSData(contentsOfURL:streamUrl)
-                if (trackDataOp == nil) {
-                    println("Couldn't load NSData with contentsOfURL: \(streamUrl)")
-                    return
-                }
-                let trackData = trackDataOp!
-                if let errorNSData = error {
-                    println(errorNSData.localizedDescription)
-                    return
-                }
-                
-                let targetPath: String = NSString.pathWithComponents([documentsPath, "\(artist) - \(title).mp3"])
-                let writeSuccess = trackData.writeToFile(targetPath, atomically: true)
-                if (writeSuccess) {
-                    println("Write successful for \(targetPath)")
-                } else {
-                    println("Write failed for \(targetPath)")
-                }
-            } else {
-                println("Neither URL nor error returned from Scraper.getSourceURLForTrack")
-            }
-        }
+        Scraper.getSourceURLForTrack(id, key: key, onURL: { sourceUrl in
+            let targetURL = NSURL.fileURLWithPathComponents([documentsPath, "\(artist) - \(title).mp3"])!
+            Alamofire.download(.GET, sourceUrl, { (_, _) in targetURL })
+                .progress( { rawBytesSinceLast, rawBytesReceived, rawBytesTotal in
+                    let percent = Float(rawBytesReceived) / Float(rawBytesTotal) * 100
+                    println("\(percent)")
+                }).response( { request, response, _, errorOp in
+                    if let error = errorOp {
+                        println("Error while downloading track: \(error.localizedDescription)")
+                    } else {
+                        println("Track saved to \(targetURL)")
+                    }
+                })
+            Alamofire.request(.GET, sourceUrl).validate(statusCode: [200])
+        }, onError: { error in
+            println("Error while getting source URL for \(id): \(error.localizedDescription)")
+        })
 
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     func refreshFeed() {
-        Scraper.getPopularTracks { (tracks, error) -> Void in
+        Scraper.getPopularTracks( { tracks in
             self.refreshControl.endRefreshing()
-            if let errorReturned = error {
-                println(errorReturned.localizedDescription)
-            } else if let tracksReturned = tracks {
-                self.tracks = tracksReturned
-            } else {
-                println("No tracks or error returned from Scraper.getPopularTracks")
-            }
-        }
+            self.tracks = tracks
+        }, onError: { error in
+            println("Error while refreshing feed: \(error.localizedDescription)")
+        })
     }
 }

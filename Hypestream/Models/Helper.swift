@@ -8,7 +8,10 @@
 
 import Foundation
 
+let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+
 class Helper {
+    
     class func makeError(description: String, code: Int) -> NSError {
         let bundleIdent = NSBundle.mainBundle().bundleIdentifier!
         let info = [NSLocalizedDescriptionKey: description]
