@@ -47,22 +47,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        let row = tableView.cellForRowAtIndexPath(indexPath) as HypeTrackCell
+        row.loading = true
+        row.userInteractionEnabled = false
+
         let track = tracks[indexPath.row]
         let idOp = track["id"].asString
         let keyOp = track["key"].asString
         let artistOp = track["artist"].asString
         let titleOp = track["song"].asString
-        
         if (idOp == nil || keyOp == nil) {
             println("Missing ID or key for \(track)")
             return
         }
-
         if (artistOp == nil || titleOp == nil) {
             println("Missing artist or title for \(track)")
             return
         }
-        
         let id = idOp!
         let key = keyOp!
         let artist = artistOp!
@@ -73,8 +74,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             Alamofire.download(.GET, sourceUrl, { (_, _) in targetURL })
                 .progress( { rawBytesSinceLast, rawBytesReceived, rawBytesTotal in
                     let percent = Float(rawBytesReceived) / Float(rawBytesTotal) * 100
-                    println("\(percent)")
+                    row.progress = percent
                 }).response( { request, response, _, errorOp in
+                    row.progress = 1
+                    row.loading = false
                     if let error = errorOp {
                         println("Error while downloading track: \(error.localizedDescription)")
                     } else {

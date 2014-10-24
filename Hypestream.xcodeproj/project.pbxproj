@@ -16,6 +16,24 @@
 		3651ED9519F43B9C00F94C28 /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3651ED9419F43B9C00F94C28 /* json.swift */; };
 		3690F5EC19F9B24B009CF5F7 /* HypeTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3690F5EB19F9B24B009CF5F7 /* HypeTrackCell.xib */; };
 		3690F5EE19F9B2D7009CF5F7 /* HypeTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3690F5ED19F9B2D7009CF5F7 /* HypeTrackCell.swift */; };
+		3690F66019FA1181009CF5F7 /* M13ProgressConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F63A19FA1181009CF5F7 /* M13ProgressConsole.m */; };
+		3690F66119FA1181009CF5F7 /* M13ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F63D19FA1181009CF5F7 /* M13ProgressHUD.m */; };
+		3690F66219FA1181009CF5F7 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F63F19FA1181009CF5F7 /* UIImage+ImageEffects.m */; };
+		3690F66319FA1181009CF5F7 /* UINavigationController+M13ProgressViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F64219FA1181009CF5F7 /* UINavigationController+M13ProgressViewBar.m */; };
+		3690F66419FA1181009CF5F7 /* M13ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F64519FA1181009CF5F7 /* M13ProgressView.m */; };
+		3690F66519FA1181009CF5F7 /* M13ProgressViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F64719FA1181009CF5F7 /* M13ProgressViewBar.m */; };
+		3690F66619FA1181009CF5F7 /* M13ProgressViewBorderedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F64919FA1181009CF5F7 /* M13ProgressViewBorderedBar.m */; };
+		3690F66719FA1181009CF5F7 /* M13ProgressViewFilteredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F64B19FA1181009CF5F7 /* M13ProgressViewFilteredImage.m */; };
+		3690F66819FA1181009CF5F7 /* M13ProgressViewImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F64D19FA1181009CF5F7 /* M13ProgressViewImage.m */; };
+		3690F66919FA1181009CF5F7 /* M13ProgressViewLetterpress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F64F19FA1181009CF5F7 /* M13ProgressViewLetterpress.m */; };
+		3690F66A19FA1181009CF5F7 /* M13ProgressViewMetro.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65119FA1181009CF5F7 /* M13ProgressViewMetro.m */; };
+		3690F66B19FA1181009CF5F7 /* M13ProgressViewMetroDotPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65319FA1181009CF5F7 /* M13ProgressViewMetroDotPolygon.m */; };
+		3690F66C19FA1181009CF5F7 /* M13ProgressViewPie.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65519FA1181009CF5F7 /* M13ProgressViewPie.m */; };
+		3690F66D19FA1181009CF5F7 /* M13ProgressViewRadiative.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65719FA1181009CF5F7 /* M13ProgressViewRadiative.m */; };
+		3690F66E19FA1181009CF5F7 /* M13ProgressViewRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65919FA1181009CF5F7 /* M13ProgressViewRing.m */; };
+		3690F66F19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65B19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.m */; };
+		3690F67019FA1181009CF5F7 /* M13ProgressViewSegmentedRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65D19FA1181009CF5F7 /* M13ProgressViewSegmentedRing.m */; };
+		3690F67119FA1181009CF5F7 /* M13ProgressViewStripedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65F19FA1181009CF5F7 /* M13ProgressViewStripedBar.m */; };
 		36D96B3119F6AE5700E2BB92 /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D96B3019F6AE5700E2BB92 /* Scraper.swift */; };
 		36D96B3319F6B40200E2BB92 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D96B3219F6B40200E2BB92 /* Helper.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +89,43 @@
 		3651ED9419F43B9C00F94C28 /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
 		3690F5EB19F9B24B009CF5F7 /* HypeTrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HypeTrackCell.xib; sourceTree = "<group>"; };
 		3690F5ED19F9B2D7009CF5F7 /* HypeTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HypeTrackCell.swift; sourceTree = "<group>"; };
+		3690F63919FA1181009CF5F7 /* M13ProgressConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressConsole.h; sourceTree = "<group>"; };
+		3690F63A19FA1181009CF5F7 /* M13ProgressConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressConsole.m; sourceTree = "<group>"; };
+		3690F63C19FA1181009CF5F7 /* M13ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressHUD.h; sourceTree = "<group>"; };
+		3690F63D19FA1181009CF5F7 /* M13ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressHUD.m; sourceTree = "<group>"; };
+		3690F63E19FA1181009CF5F7 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		3690F63F19FA1181009CF5F7 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		3690F64119FA1181009CF5F7 /* UINavigationController+M13ProgressViewBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+M13ProgressViewBar.h"; sourceTree = "<group>"; };
+		3690F64219FA1181009CF5F7 /* UINavigationController+M13ProgressViewBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+M13ProgressViewBar.m"; sourceTree = "<group>"; };
+		3690F64419FA1181009CF5F7 /* M13ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressView.h; sourceTree = "<group>"; };
+		3690F64519FA1181009CF5F7 /* M13ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressView.m; sourceTree = "<group>"; };
+		3690F64619FA1181009CF5F7 /* M13ProgressViewBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewBar.h; sourceTree = "<group>"; };
+		3690F64719FA1181009CF5F7 /* M13ProgressViewBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewBar.m; sourceTree = "<group>"; };
+		3690F64819FA1181009CF5F7 /* M13ProgressViewBorderedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewBorderedBar.h; sourceTree = "<group>"; };
+		3690F64919FA1181009CF5F7 /* M13ProgressViewBorderedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewBorderedBar.m; sourceTree = "<group>"; };
+		3690F64A19FA1181009CF5F7 /* M13ProgressViewFilteredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewFilteredImage.h; sourceTree = "<group>"; };
+		3690F64B19FA1181009CF5F7 /* M13ProgressViewFilteredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewFilteredImage.m; sourceTree = "<group>"; };
+		3690F64C19FA1181009CF5F7 /* M13ProgressViewImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewImage.h; sourceTree = "<group>"; };
+		3690F64D19FA1181009CF5F7 /* M13ProgressViewImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewImage.m; sourceTree = "<group>"; };
+		3690F64E19FA1181009CF5F7 /* M13ProgressViewLetterpress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewLetterpress.h; sourceTree = "<group>"; };
+		3690F64F19FA1181009CF5F7 /* M13ProgressViewLetterpress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewLetterpress.m; sourceTree = "<group>"; };
+		3690F65019FA1181009CF5F7 /* M13ProgressViewMetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewMetro.h; sourceTree = "<group>"; };
+		3690F65119FA1181009CF5F7 /* M13ProgressViewMetro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewMetro.m; sourceTree = "<group>"; };
+		3690F65219FA1181009CF5F7 /* M13ProgressViewMetroDotPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewMetroDotPolygon.h; sourceTree = "<group>"; };
+		3690F65319FA1181009CF5F7 /* M13ProgressViewMetroDotPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewMetroDotPolygon.m; sourceTree = "<group>"; };
+		3690F65419FA1181009CF5F7 /* M13ProgressViewPie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewPie.h; sourceTree = "<group>"; };
+		3690F65519FA1181009CF5F7 /* M13ProgressViewPie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewPie.m; sourceTree = "<group>"; };
+		3690F65619FA1181009CF5F7 /* M13ProgressViewRadiative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewRadiative.h; sourceTree = "<group>"; };
+		3690F65719FA1181009CF5F7 /* M13ProgressViewRadiative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewRadiative.m; sourceTree = "<group>"; };
+		3690F65819FA1181009CF5F7 /* M13ProgressViewRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewRing.h; sourceTree = "<group>"; };
+		3690F65919FA1181009CF5F7 /* M13ProgressViewRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewRing.m; sourceTree = "<group>"; };
+		3690F65A19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewSegmentedBar.h; sourceTree = "<group>"; };
+		3690F65B19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewSegmentedBar.m; sourceTree = "<group>"; };
+		3690F65C19FA1181009CF5F7 /* M13ProgressViewSegmentedRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewSegmentedRing.h; sourceTree = "<group>"; };
+		3690F65D19FA1181009CF5F7 /* M13ProgressViewSegmentedRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewSegmentedRing.m; sourceTree = "<group>"; };
+		3690F65E19FA1181009CF5F7 /* M13ProgressViewStripedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewStripedBar.h; sourceTree = "<group>"; };
+		3690F65F19FA1181009CF5F7 /* M13ProgressViewStripedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewStripedBar.m; sourceTree = "<group>"; };
+		3690F67319FA11ED009CF5F7 /* Hypestream-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hypestream-Bridging-Header.h"; sourceTree = "<group>"; };
 		3695C3D319F7906000CB981F /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		36D96B3019F6AE5700E2BB92 /* Scraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scraper.swift; sourceTree = "<group>"; };
 		36D96B3219F6B40200E2BB92 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -131,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				360990D119F1A736004BC4AF /* Info.plist */,
+				3690F67319FA11ED009CF5F7 /* Hypestream-Bridging-Header.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -191,9 +247,85 @@
 		3651ED9319F43B8F00F94C28 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				3690F63719FA1181009CF5F7 /* M13ProgressSuite */,
 				3651ED9419F43B9C00F94C28 /* json.swift */,
 			);
 			path = Vendor;
+			sourceTree = "<group>";
+		};
+		3690F63719FA1181009CF5F7 /* M13ProgressSuite */ = {
+			isa = PBXGroup;
+			children = (
+				3690F63819FA1181009CF5F7 /* Console */,
+				3690F63B19FA1181009CF5F7 /* HUD */,
+				3690F64019FA1181009CF5F7 /* NavigationController */,
+				3690F64319FA1181009CF5F7 /* ProgressViews */,
+			);
+			path = M13ProgressSuite;
+			sourceTree = "<group>";
+		};
+		3690F63819FA1181009CF5F7 /* Console */ = {
+			isa = PBXGroup;
+			children = (
+				3690F63919FA1181009CF5F7 /* M13ProgressConsole.h */,
+				3690F63A19FA1181009CF5F7 /* M13ProgressConsole.m */,
+			);
+			path = Console;
+			sourceTree = "<group>";
+		};
+		3690F63B19FA1181009CF5F7 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				3690F63C19FA1181009CF5F7 /* M13ProgressHUD.h */,
+				3690F63D19FA1181009CF5F7 /* M13ProgressHUD.m */,
+				3690F63E19FA1181009CF5F7 /* UIImage+ImageEffects.h */,
+				3690F63F19FA1181009CF5F7 /* UIImage+ImageEffects.m */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		3690F64019FA1181009CF5F7 /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				3690F64119FA1181009CF5F7 /* UINavigationController+M13ProgressViewBar.h */,
+				3690F64219FA1181009CF5F7 /* UINavigationController+M13ProgressViewBar.m */,
+			);
+			path = NavigationController;
+			sourceTree = "<group>";
+		};
+		3690F64319FA1181009CF5F7 /* ProgressViews */ = {
+			isa = PBXGroup;
+			children = (
+				3690F64419FA1181009CF5F7 /* M13ProgressView.h */,
+				3690F64519FA1181009CF5F7 /* M13ProgressView.m */,
+				3690F64619FA1181009CF5F7 /* M13ProgressViewBar.h */,
+				3690F64719FA1181009CF5F7 /* M13ProgressViewBar.m */,
+				3690F64819FA1181009CF5F7 /* M13ProgressViewBorderedBar.h */,
+				3690F64919FA1181009CF5F7 /* M13ProgressViewBorderedBar.m */,
+				3690F64A19FA1181009CF5F7 /* M13ProgressViewFilteredImage.h */,
+				3690F64B19FA1181009CF5F7 /* M13ProgressViewFilteredImage.m */,
+				3690F64C19FA1181009CF5F7 /* M13ProgressViewImage.h */,
+				3690F64D19FA1181009CF5F7 /* M13ProgressViewImage.m */,
+				3690F64E19FA1181009CF5F7 /* M13ProgressViewLetterpress.h */,
+				3690F64F19FA1181009CF5F7 /* M13ProgressViewLetterpress.m */,
+				3690F65019FA1181009CF5F7 /* M13ProgressViewMetro.h */,
+				3690F65119FA1181009CF5F7 /* M13ProgressViewMetro.m */,
+				3690F65219FA1181009CF5F7 /* M13ProgressViewMetroDotPolygon.h */,
+				3690F65319FA1181009CF5F7 /* M13ProgressViewMetroDotPolygon.m */,
+				3690F65419FA1181009CF5F7 /* M13ProgressViewPie.h */,
+				3690F65519FA1181009CF5F7 /* M13ProgressViewPie.m */,
+				3690F65619FA1181009CF5F7 /* M13ProgressViewRadiative.h */,
+				3690F65719FA1181009CF5F7 /* M13ProgressViewRadiative.m */,
+				3690F65819FA1181009CF5F7 /* M13ProgressViewRing.h */,
+				3690F65919FA1181009CF5F7 /* M13ProgressViewRing.m */,
+				3690F65A19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.h */,
+				3690F65B19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.m */,
+				3690F65C19FA1181009CF5F7 /* M13ProgressViewSegmentedRing.h */,
+				3690F65D19FA1181009CF5F7 /* M13ProgressViewSegmentedRing.m */,
+				3690F65E19FA1181009CF5F7 /* M13ProgressViewStripedBar.h */,
+				3690F65F19FA1181009CF5F7 /* M13ProgressViewStripedBar.m */,
+			);
+			path = ProgressViews;
 			sourceTree = "<group>";
 		};
 		3695C3D419F7906000CB981F /* Products */ = {
@@ -335,11 +467,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3690F66719FA1181009CF5F7 /* M13ProgressViewFilteredImage.m in Sources */,
+				3690F66C19FA1181009CF5F7 /* M13ProgressViewPie.m in Sources */,
 				36D96B3119F6AE5700E2BB92 /* Scraper.swift in Sources */,
+				3690F66319FA1181009CF5F7 /* UINavigationController+M13ProgressViewBar.m in Sources */,
+				3690F66819FA1181009CF5F7 /* M13ProgressViewImage.m in Sources */,
 				360990D519F1A736004BC4AF /* ViewController.swift in Sources */,
+				3690F66919FA1181009CF5F7 /* M13ProgressViewLetterpress.m in Sources */,
+				3690F67119FA1181009CF5F7 /* M13ProgressViewStripedBar.m in Sources */,
+				3690F66119FA1181009CF5F7 /* M13ProgressHUD.m in Sources */,
+				3690F67019FA1181009CF5F7 /* M13ProgressViewSegmentedRing.m in Sources */,
+				3690F66F19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.m in Sources */,
+				3690F66419FA1181009CF5F7 /* M13ProgressView.m in Sources */,
 				36D96B3319F6B40200E2BB92 /* Helper.swift in Sources */,
+				3690F66019FA1181009CF5F7 /* M13ProgressConsole.m in Sources */,
+				3690F66D19FA1181009CF5F7 /* M13ProgressViewRadiative.m in Sources */,
+				3690F66E19FA1181009CF5F7 /* M13ProgressViewRing.m in Sources */,
+				3690F66219FA1181009CF5F7 /* UIImage+ImageEffects.m in Sources */,
 				3690F5EE19F9B2D7009CF5F7 /* HypeTrackCell.swift in Sources */,
+				3690F66B19FA1181009CF5F7 /* M13ProgressViewMetroDotPolygon.m in Sources */,
+				3690F66619FA1181009CF5F7 /* M13ProgressViewBorderedBar.m in Sources */,
+				3690F66519FA1181009CF5F7 /* M13ProgressViewBar.m in Sources */,
 				360990D319F1A736004BC4AF /* AppDelegate.swift in Sources */,
+				3690F66A19FA1181009CF5F7 /* M13ProgressViewMetro.m in Sources */,
 				3651ED9519F43B9C00F94C28 /* json.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +616,7 @@
 				INFOPLIST_FILE = "Hypestream/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hypestream/Supporting Files/Hypestream-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -476,6 +627,7 @@
 				INFOPLIST_FILE = "Hypestream/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hypestream/Supporting Files/Hypestream-Bridging-Header.h";
 			};
 			name = Release;
 		};

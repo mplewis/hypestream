@@ -31,10 +31,19 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nq-zF-pFh" customClass="M13ProgressViewBar">
+                        <rect key="frame" x="0.0" y="41.5" width="320" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="pdU-3j-Rv6"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="3Nq-zF-pFh" firstAttribute="leading" secondItem="Asw-Wj-Fde" secondAttribute="leadingMargin" constant="-8" id="5iz-cE-JdJ"/>
                     <constraint firstItem="sd7-IZ-LAt" firstAttribute="trailing" secondItem="Asw-Wj-Fde" secondAttribute="trailingMargin" id="6sl-a7-Jcl"/>
                     <constraint firstItem="zSv-xr-Jzd" firstAttribute="trailing" secondItem="Asw-Wj-Fde" secondAttribute="trailingMargin" id="E8s-Nx-ZJS"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="3Nq-zF-pFh" secondAttribute="bottom" constant="-7" id="Hnz-ck-e5y"/>
                     <constraint firstAttribute="trailing" secondItem="sd7-IZ-LAt" secondAttribute="trailing" id="Jdq-1I-VTO"/>
                     <constraint firstItem="sd7-IZ-LAt" firstAttribute="top" secondItem="Asw-Wj-Fde" secondAttribute="topMargin" constant="-6" id="LMs-6n-K87"/>
                     <constraint firstAttribute="trailing" secondItem="zSv-xr-Jzd" secondAttribute="trailing" constant="8" id="N14-3w-V0v"/>
@@ -45,6 +54,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="zSv-xr-Jzd" secondAttribute="bottom" constant="-6" id="kRm-wn-jsW"/>
                     <constraint firstItem="zSv-xr-Jzd" firstAttribute="leading" secondItem="Asw-Wj-Fde" secondAttribute="leadingMargin" id="tza-wu-sb8"/>
                     <constraint firstItem="sd7-IZ-LAt" firstAttribute="leading" secondItem="Asw-Wj-Fde" secondAttribute="leadingMargin" id="yqc-nY-Lgb"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3Nq-zF-pFh" secondAttribute="trailing" constant="-8" id="zmH-45-FcI"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -59,6 +69,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="artistLabel" destination="zSv-xr-Jzd" id="Sat-Qv-HtW"/>
+                <outlet property="progressBar" destination="3Nq-zF-pFh" id="XTr-0o-NeI"/>
                 <outlet property="titleLabel" destination="sd7-IZ-LAt" id="ccq-ej-cyA"/>
             </connections>
             <point key="canvasLocation" x="516" y="377"/>
