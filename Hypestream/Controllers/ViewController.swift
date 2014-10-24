@@ -25,6 +25,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.refreshControl.addTarget(self, action: Selector("refreshFeed"), forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(self.refreshControl)
         
+        self.tableView.registerNib(UINib(nibName: "HypeTrackCell", bundle: nil), forCellReuseIdentifier: "HypeTrackCell")
+        
         self.refreshFeed()
     }
     
@@ -33,12 +35,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("SongCell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("HypeTrackCell") as HypeTrackCell
         let track = tracks[indexPath.row]
-        let artist = track["artist"].asString
-        let title = track["song"].asString
-        cell.textLabel.text = title
-        cell.detailTextLabel!.text = artist
+        if let artist = track["artist"].asString {
+            cell.artist = artist
+        }
+        if let title = track["song"].asString {
+            cell.title = title
+        }
         return cell
     }
     
@@ -90,6 +94,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.refreshControl.endRefreshing()
             self.tracks = tracks
         }, onError: { error in
+            self.refreshControl.endRefreshing()
             println("Error while refreshing feed: \(error.localizedDescription)")
         })
     }
