@@ -16,11 +16,11 @@ class Scraper {
         let bundleIdent = NSBundle.mainBundle().bundleIdentifier!
         
         NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: homeUrl), queue: queue) { (response, htmlData, error) in
-            if (htmlData == nil) {
-                onError(Helper.makeError("Couldn't scrape HTML from Hype Machine", code: -100)); return
-            }
             if let givenError = error {
                 onError(givenError); return
+            }
+            if (htmlData == nil) {
+                onError(Helper.makeError("Couldn't scrape HTML from Hype Machine", code: -100)); return
             }
             
             let htmlString = NSString(data: htmlData, encoding: NSUTF8StringEncoding)!
