@@ -27,6 +27,13 @@
     M13ProgressViewAction currentAction;
 }
 
+- (id)copy
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"M13ProgressViewMetro does not implement copy"]
+                                 userInfo:nil];
+}
+
 #pragma mark Initalization
 
 - (id)init
