@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 let queue = NSOperationQueue.mainQueue()
 
@@ -66,5 +67,102 @@ class Scraper {
                 onError(Helper.makeError("Couldn't parse URL from response data", code: -203)); return
             }
         }
+    }
+    
+    class func insertTrackObjFromJSON(rawTrack: JSON, context: NSManagedObjectContext,
+                                      onTrack: (Track) -> Void, onError: (NSError) -> Void) {
+        let idOp = rawTrack["id"].asString
+        let keyOp = rawTrack["key"].asString
+        let artistOp = rawTrack["artist"].asString
+        let titleOp = rawTrack["song"].asString
+        if (idOp != nil && keyOp != nil && artistOp != nil && titleOp != nil) {
+            let id = idOp!
+            let key = keyOp!
+            let artist = artistOp!
+            let title = titleOp!
+
+            Scraper.getSourceURLForTrack(id, key: key, onURL: { url in
+                let track = NSEntityDescription.insertNewObjectForEntityForName("Track", inManagedObjectContext: context) as Track
+                track.hypem_id = id
+                track.artist = artist
+                track.title = title
+                track.source_url = url
+                track.state = .NotDownloaded
+                var error: NSError?
+                context.save(&error)
+                if (error == nil) {
+                    onTrack(track); return
+                } else {
+                    onError(error!); return
+                }
+            }, onError: onError)
+        } else {
+            let info = ["rawTrack": rawTrack.toString(pretty: true)]
+            onError(Helper.makeError("Track JSON id, key, artist or title were nil", code: -301, info: info)); return
+        }
+    }
+    
+    class func addNewTracksToDB(#context: NSManagedObjectContext,
+                                onSuccess: (added: [Track], skipped: [Track], errors: [NSError]) -> Void,
+                                onError: (NSError) -> Void) {
+        Scraper.getPopularTracks({ jsonTracks in
+            var added = [Track]()
+            var skipped = [Track]()
+            var errors = [NSError]()
+
+            let addedLock = NSLock()
+            let skippedLock = NSLock()
+            let errorsLock = NSLock()
+
+            let queue = dispatch_get_global_queue(0, 0)
+            let group = dispatch_group_create()
+            
+            for jsonTrack in jsonTracks {
+                dispatch_group_async(group, queue) {
+                    let idOp = jsonTrack["id"].asString
+                    if let id = idOp {
+                        let request = NSFetchRequest(entityName: "Track")
+                        request.predicate = NSPredicate(format: "hypem_id = %@", id)
+
+                        var error: NSError?
+                        let resultsOp = context.executeFetchRequest(request, error: &error)
+                        if error != nil {
+                            onError(error!); return
+                        }
+                        let results = resultsOp!
+                        
+                        if results.count > 0 {
+                            skippedLock.lock()
+                            skipped.append(results[0] as Track)
+                            skippedLock.unlock()
+                        } else {
+                            let sem = dispatch_semaphore_create(0)
+                            Scraper.insertTrackObjFromJSON(jsonTrack, context: context, onTrack: { track in
+                                dispatch_semaphore_signal(sem)
+                                addedLock.lock()
+                                added.append(track)
+                                addedLock.unlock()
+                            }, onError: { error in
+                                dispatch_semaphore_signal(sem)
+                                errorsLock.lock()
+                                errors.append(error)
+                                errorsLock.unlock()
+                            })
+                            dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER)
+                        }
+                        
+                    } else {
+                        let info = ["track": jsonTrack.toString(pretty: true)]
+                        errorsLock.lock()
+                        errors.append(Helper.makeError("No ID for track", code: -401, info: info))
+                        errorsLock.unlock()
+                    }
+                }
+            }
+            
+            dispatch_group_notify(group, queue) {
+                onSuccess(added: added, skipped: skipped, errors: errors); return
+            }
+        }, onError: onError)
     }
 }
