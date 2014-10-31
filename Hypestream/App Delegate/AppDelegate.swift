@@ -15,38 +15,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        println("Documents path: \(documentsPath)")
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-        
-        let newItem = NSEntityDescription.insertNewObjectForEntityForName("Track", inManagedObjectContext: self.managedObjectContext!) as Track
-        newItem.title = "Digital Love"
-        newItem.artist = "Daft Punk"
-        newItem.state = .NotDownloaded
-        println(newItem)
-        
-        let fetchRequest = NSFetchRequest(entityName: "Track")
-        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Track] {
-            let track = fetchResults[0]
-            println("\(track.artist) - \(track.title)")
-        }
 
         return true
     }
 
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         println("Fetching in background...")
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
-        let homeUrl = NSURL(string: "http://hypem.com/popular/1")
-        let task = session.dataTaskWithURL(homeUrl!, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                println("Fetch failed.")
-                completionHandler(UIBackgroundFetchResult.Failed)
-            } else {
-                println("Fetch successful.")
-                completionHandler(UIBackgroundFetchResult.NewData)
+        Scraper.addNewTracksToDB(context: self.managedObjectContext!, onSuccess: { (added, skipped, errors) -> Void in
+            for track in added {
+                println("Added track: \(track.artist) - \(track.title)")
             }
+            for track in skipped {
+                println("Skipped existing track: \(track.artist) - \(track.title)")
+            }
+            for error in errors {
+                println("Error: \(error.userInfo)")
+            }
+            println("Done! Added \(added.count) tracks with \(errors.count) errors.")
+
+            if (added.count == 0) {
+                completionHandler(.NewData)
+            } else {
+                completionHandler(.NoData)
+            }
+        }, onError: { (error) -> Void in
+            completionHandler(.Failed)
         })
-        task.resume()
     }
     
     // MARK: - Core Data stack
