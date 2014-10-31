@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             println("Done! Added \(added.count) tracks with \(errors.count) errors.")
 
-            if (added.count == 0) {
+            if (added.count > 0) {
                 completionHandler(.NewData)
             } else {
                 completionHandler(.NoData)
