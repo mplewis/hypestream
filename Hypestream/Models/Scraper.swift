@@ -41,7 +41,7 @@ class Scraper {
         }
     }
     
-    class func getSourceURLForTrack(id: String, key: String, onURL: (String) -> Void, onError: (NSError) -> Void) {
+    class func getSourceURLForTrack(#id: String, key: String, onURL: (String) -> Void, onError: (NSError) -> Void) {
         let mediaUrl = NSURL(string: "http://hypem.com/serve/source/\(id)/\(key)")!
         let mediaRequest = NSMutableURLRequest(URL: mediaUrl)
         mediaRequest.HTTPMethod = "POST"
@@ -81,7 +81,7 @@ class Scraper {
             let artist = artistOp!
             let title = titleOp!
 
-            Scraper.getSourceURLForTrack(id, key: key, onURL: { url in
+            Scraper.getSourceURLForTrack(id: id, key: key, onURL: { url in
                 let track = NSEntityDescription.insertNewObjectForEntityForName("Track", inManagedObjectContext: context) as Track
                 track.hypem_id = id
                 track.artist = artist

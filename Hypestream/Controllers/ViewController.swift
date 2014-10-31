@@ -69,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let artist = artistOp!
         let title = titleOp!
 
-        Scraper.getSourceURLForTrack(id, key: key, onURL: { sourceUrl in
+        Scraper.getSourceURLForTrack(id: id, key: key, onURL: { sourceUrl in
             let targetURL = NSURL.fileURLWithPathComponents([documentsPath, "\(artist) - \(title).mp3"])!
             Alamofire.download(.GET, sourceUrl, { (_, _) in targetURL })
                 .progress( { rawBytesSinceLast, rawBytesReceived, rawBytesTotal in
@@ -93,7 +93,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func refreshFeed() {
-        Scraper.getPopularTracks( { tracks in
+        Scraper.getPopularTracks({ tracks in
             self.refreshControl.endRefreshing()
             self.tracks = tracks
         }, onError: { error in
