@@ -20,7 +20,7 @@ class Scraper {
                 onError(givenError); return
             }
             if (htmlData == nil) {
-                onError(Helper.makeError("Couldn't scrape HTML from Hype Machine", code: -100)); return
+                onError(Helper.makeError("Couldn't scrape HTML from Hype Machine", code: -104)); return
             }
             
             let htmlString = NSString(data: htmlData, encoding: NSUTF8StringEncoding)!
