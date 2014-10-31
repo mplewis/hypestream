@@ -17,4 +17,12 @@ class Helper {
         let info = [NSLocalizedDescriptionKey: description]
         return NSError(domain: bundleIdent, code: code, userInfo: info)
     }
+    
+    class func makeError(description: String, code: Int, info: NSDictionary) -> NSError {
+        let bundleIdent = NSBundle.mainBundle().bundleIdentifier!
+        let infoCopy = info.mutableCopy() as NSMutableDictionary
+        infoCopy[NSLocalizedDescriptionKey] = description
+        let infoFrozen = NSDictionary(dictionary: infoCopy)
+        return NSError(domain: bundleIdent, code: code, userInfo: infoFrozen)
+    }
 }
