@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--Hypestream-->
+        <!--Downloads-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Hypestream" customModuleProvider="target" sceneMemberID="viewController">
@@ -34,7 +34,7 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="eRh-Cn-nCo" secondAttribute="bottom" id="zRP-NQ-zeq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Hypestream" id="TkB-vF-7ET"/>
+                    <navigationItem key="navigationItem" title="Downloads" id="TkB-vF-7ET"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
@@ -45,7 +45,7 @@
             </objects>
             <point key="canvasLocation" x="505.5" y="1941.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Trash-->
         <scene sceneID="9Ts-Mb-6NC">
             <objects>
                 <viewController id="6GZ-OL-pOQ" sceneMemberID="viewController">
@@ -58,7 +58,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Zhk-fQ-MLT"/>
+                    <navigationItem key="navigationItem" title="Trash" id="Zhk-fQ-MLT"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                 </viewController>
@@ -66,7 +66,7 @@
             </objects>
             <point key="canvasLocation" x="1447.5" y="1941.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Inbox-->
         <scene sceneID="fUw-3h-zIE">
             <objects>
                 <viewController id="fhP-ca-cGB" sceneMemberID="viewController">
@@ -79,7 +79,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="oaS-77-0E1"/>
+                    <navigationItem key="navigationItem" title="Inbox" id="oaS-77-0E1"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                 </viewController>
@@ -173,7 +173,7 @@
             </objects>
             <point key="canvasLocation" x="1447.5" y="1165.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Favorites-->
         <scene sceneID="mjB-36-vAK">
             <objects>
                 <viewController id="thd-aB-cTq" sceneMemberID="viewController">
@@ -186,7 +186,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="T5a-5H-5Dd"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="T5a-5H-5Dd"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                 </viewController>
