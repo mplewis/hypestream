@@ -17,9 +17,10 @@ class Scraper {
         let bundleIdent = NSBundle.mainBundle().bundleIdentifier!
         
         NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: homeUrl), queue: queue) { (response, htmlData, error) in
-            if let givenError = error {
-                onError(givenError); return
+            if (error != nil) {
+                onError(error); return
             }
+
             if (htmlData == nil) {
                 onError(Helper.makeError("Couldn't scrape HTML from Hype Machine", code: -104)); return
             }
@@ -33,10 +34,10 @@ class Scraper {
                 if let retrieved = scriptJson["tracks"].asArray {
                     onTracks(retrieved); return
                 } else {
-                    onError(Helper.makeError("Couldn't load tracks from Hype Machine JSON", code: -101)); return
+                    onError(Helper.makeError("Couldn't load tracks from JSON", code: -101)); return
                 }
             } else {
-                onError(Helper.makeError("Couldn't parse JSON from Hype Machine", code: -102)); return
+                onError(Helper.makeError("Couldn't parse JSON", code: -102)); return
             }
         }
     }
@@ -46,7 +47,11 @@ class Scraper {
         let mediaRequest = NSMutableURLRequest(URL: mediaUrl)
         mediaRequest.HTTPMethod = "POST"
         
-        NSURLConnection.sendAsynchronousRequest(mediaRequest, queue: queue) { (response, jsonData, error) in
+        NSURLConnection.sendAsynchronousRequest(mediaRequest, queue: queue) { (response, rawJsonData, error) in
+            if (error != nil) {
+                onError(error); return
+            }
+
             let httpResponseOp = response as? NSHTTPURLResponse
             if (httpResponseOp == nil) {
                 onError(Helper.makeError("Got a nil HTTP response", code: -204)); return
@@ -54,17 +59,18 @@ class Scraper {
             let httpResponse = httpResponseOp!
 
             if (httpResponse.statusCode != 200) {
-                onError(Helper.makeError("Got a non-200 status code: \(httpResponse.statusCode)", code: -201)); return
+                let info = ["statusCode": httpResponse.statusCode];
+                onError(Helper.makeError("Got a non-200 status code", code: -201, info: info)); return
             }
-            if (jsonData == nil) {
-                onError(Helper.makeError("Couldn't retrieve stream URL", code: -202)); return
+            if (rawJsonData == nil) {
+                onError(Helper.makeError("Couldn't parse JSON", code: -202)); return
             }
-            let jsonData = JSON(string: NSString(data: jsonData, encoding: NSUTF8StringEncoding)!)
+            let json = JSON(string: NSString(data: rawJsonData, encoding: NSUTF8StringEncoding)!)
 
-            if let streamUrlString = jsonData["url"].asString {
+            if let streamUrlString = json["url"].asString {
                 onURL(streamUrlString); return
             } else {
-                onError(Helper.makeError("Couldn't parse URL from response data", code: -203)); return
+                onError(Helper.makeError("Couldn't find stream URL in JSON", code: -203)); return
             }
         }
     }
@@ -97,7 +103,7 @@ class Scraper {
                 }
             }, onError: onError)
         } else {
-            let info = ["rawTrack": rawTrack.toString(pretty: true)]
+            let info = ["rawTrack": rawTrack.toString(pretty: false)]
             onError(Helper.makeError("Track JSON id, key, artist or title were nil", code: -301, info: info)); return
         }
     }
@@ -152,9 +158,9 @@ class Scraper {
                         }
                         
                     } else {
-                        let info = ["track": jsonTrack.toString(pretty: true)]
+                        let info = ["track": jsonTrack.toString(pretty: false)]
                         errorsLock.lock()
-                        errors.append(Helper.makeError("No ID for track", code: -401, info: info))
+                        errors.append(Helper.makeError("No ID found for track", code: -401, info: info))
                         errorsLock.unlock()
                     }
                 }
