@@ -17,6 +17,7 @@ class Track: NSManagedObject {
     
     @NSManaged var artist: String
     @NSManaged var title: String
+    @NSManaged var hypem_id: String
     @NSManaged var state_raw: NSNumber
     @NSManaged var source_url: String
     @NSManaged var local_file_url: String
