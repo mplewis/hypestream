@@ -9,15 +9,28 @@
 import UIKit
 import Alamofire
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSURLSessionDownloadDelegate {
+
+    // MARK: - Interface Builder
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Class Properties
 
     var tracks: [JSON] = [JSON]() {
         didSet {
             self.tableView.reloadData()
         }
     }
+
     let refreshControl = UIRefreshControl()
+    
+    lazy var bkgSession: NSURLSession = {
+        let bkgConfig = NSURLSessionConfiguration.backgroundSessionConfiguration("com.kesdev.Hypestream")
+        return NSURLSession(configuration: bkgConfig, delegate: self, delegateQueue: nil)
+    }()
+
+    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +42,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.refreshFeed()
     }
+    
+    // MARK: - UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tracks.count
@@ -50,47 +65,49 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let row = tableView.cellForRowAtIndexPath(indexPath) as HypeTrackCell
         row.loading = true
         row.userInteractionEnabled = false
-
+        
         let track = tracks[indexPath.row]
-        let idOp = track["id"].asString
-        let keyOp = track["key"].asString
-        let artistOp = track["artist"].asString
-        let titleOp = track["song"].asString
-        if (idOp == nil || keyOp == nil) {
-            println("Missing ID or key for \(track)")
-            return
-        }
-        if (artistOp == nil || titleOp == nil) {
-            println("Missing artist or title for \(track)")
-            return
-        }
-        let id = idOp!
-        let key = keyOp!
-        let artist = artistOp!
-        let title = titleOp!
 
-        Scraper.getSourceURLForTrack(id: id, key: key, onURL: { sourceUrl in
-            let targetURL = NSURL.fileURLWithPathComponents([documentsPath, "\(artist) - \(title).mp3"])!
-            Alamofire.download(.GET, sourceUrl, { (_, _) in targetURL })
-                .progress( { rawBytesSinceLast, rawBytesReceived, rawBytesTotal in
-                    let percent = Float(rawBytesReceived) / Float(rawBytesTotal) * 100
-                    row.progress = percent
-                }).response( { request, response, _, errorOp in
-                    row.progress = 1
-                    row.loading = false
-                    if let error = errorOp {
-                        println("Error while downloading track: \(error.localizedDescription)")
-                    } else {
-                        println("Track saved to \(targetURL)")
-                    }
-                })
-            Alamofire.request(.GET, sourceUrl).validate(statusCode: [200])
-        }, onError: { error in
-            println("Error while getting source URL for \(id): \(error.localizedDescription)")
-        })
-
+        if let id = track["id"].asString {
+            if let key = track["key"].asString {
+                self.downloadTrack(id: id, key: key)
+            } else {
+                println("No key for track: \(track)")
+            }
+        } else {
+            println("No id for track: \(track)")
+        }
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+    
+    // MARK: - NSURLSessionDownloadDelegate
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        let taskId = downloadTask.taskDescription
+        let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+        println("\(taskId): \(progress)")
+        if let cell = cellWithTrackId(taskId) {
+            cell.loading = true
+            cell.progress = progress
+        }
+    }
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64,
+                    expectedTotalBytes: Int64) {
+            println("\(downloadTask): \(fileOffset): \(expectedTotalBytes)")
+    }
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
+        println("Done: \(downloadTask) -> \(location)")
+        let taskId = downloadTask.taskDescription
+        if let cell = cellWithTrackId(taskId) {
+            cell.loading = false
+            cell.progress = 1
+        }
+    }
+    
+    // MARK: - Functionality
 
     func refreshFeed() {
         Scraper.getPopularTracks({ tracks in
@@ -100,5 +117,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.refreshControl.endRefreshing()
             println("Error while refreshing feed: \(error.localizedDescription)")
         })
+    }
+    
+    func downloadTrack(#id: String, key: String) {
+        println("Retrieving track: \(id): \(key)")
+        Scraper.getSourceURLForTrack(id: id, key: key, onURL: { (url) -> Void in
+            if let url = NSURL(string: url) {
+                let task = self.bkgSession.downloadTaskWithURL(url)
+                task.taskDescription = id
+                task.resume()
+            } else {
+                println("Couldn't create NSURL from \(url)")
+            }
+        }) { (error) -> Void in
+            println(error)
+        }
+    }
+    
+    func cellWithTrackId(id: String) -> HypeTrackCell? {
+        for (row, track) in enumerate(tracks) {
+            if (track["id"].asString == id) {
+                return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? HypeTrackCell
+            }
+        }
+        return nil
     }
 }
