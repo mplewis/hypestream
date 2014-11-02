@@ -9,10 +9,23 @@
 import UIKit
 
 class HypeTrackCell: UITableViewCell {
+    
+    // MARK: - Interface Builder
+    
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progressBar: M13ProgressViewBar!
+    
+    // MARK: - UITableViewCell
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.progressBar.showPercentage = false
+        self.loading = false
+    }
 
+    // MARK: - Settable properties
+    
     var artist: String = "" {
         didSet {
             self.artistLabel.text = self.artist
@@ -34,19 +47,11 @@ class HypeTrackCell: UITableViewCell {
         }
     }
     
+    // MARK: - Callable helper functions
+    
     func resetProgress() {
         self.progressBar.setProgress(0, animated: false)
         self.progress = 0
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.progressBar.showPercentage = false
-        self.loading = false
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 
 }
