@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
                     track.state = .Inbox
                     println("\(taskId): moved -> \(dest)")
                     var dbError: NSError?
-                    (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!.save(&dbError)
+                    self.managedObjectContext!.save(&dbError)
                     if (dbError != nil) {
                         println(dbError!.localizedDescription)
                     }
