@@ -18,7 +18,7 @@ class DownloadsViewController: UIViewController, UITableViewDelegate, UITableVie
 
     var tracks: [Track] = [Track]() {
         didSet {
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
     let refreshControl = UIRefreshControl()
@@ -29,19 +29,19 @@ class DownloadsViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.appDelegate.downloadProgressDelegate = self
-        self.refreshControl.addTarget(self, action: Selector("scrapeAndReload"), forControlEvents: UIControlEvents.ValueChanged)
-        self.tableView.addSubview(self.refreshControl)
-        self.tableView.registerNib(UINib(nibName: "HypeTrackCell", bundle: nil), forCellReuseIdentifier: "HypeTrackCell")
+        appDelegate.downloadProgressDelegate = self
+        refreshControl.addTarget(self, action: Selector("scrapeAndReload"), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(self.refreshControl)
+        tableView.registerNib(UINib(nibName: "HypeTrackCell", bundle: nil), forCellReuseIdentifier: "HypeTrackCell")
 
-        self.loadTracksFromDB()
-        self.refreshControl.beginRefreshing()
+        loadTracksFromDB()
+        refreshControl.beginRefreshing()
         let newOffset = CGPointMake(0, -self.tableView.contentInset.top);
-        self.tableView.setContentOffset(newOffset, animated:true);
-        self.scrapeAndReload()
+        tableView.setContentOffset(newOffset, animated:true);
+        scrapeAndReload()
     }
     
-    // MARK: - UITableView
+    // MARK: - UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tracks.count
@@ -63,6 +63,8 @@ class DownloadsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         return cell
     }
+    
+    // MARK: - UITableViewDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let row = tableView.cellForRowAtIndexPath(indexPath) as HypeTrackCell

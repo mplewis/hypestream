@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
         track.downloadProgress = 0
         track.downloadInProgress = true
         if let url = NSURL(string: track.source_url) {
-            let task = self.bkgSession.downloadTaskWithURL(url)
+            let task = bkgSession.downloadTaskWithURL(url)
             task.taskDescription = track.hypem_id
             task.resume()
         } else {
@@ -124,11 +124,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
                     track.state = .Inbox
                     println("\(taskId): moved -> \(dest)")
                     var dbError: NSError?
-                    self.managedObjectContext!.save(&dbError)
+                    managedObjectContext!.save(&dbError)
                     if (dbError != nil) {
                         println(dbError!.localizedDescription)
                     }
-                    self.downloadProgressDelegate?.didMoveTrackToInbox?(track)
+                    downloadProgressDelegate?.didMoveTrackToInbox?(track)
                 }
             } else {
                 println("Couldn't convert dest to URL: \(destString)")

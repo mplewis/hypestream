@@ -212,11 +212,11 @@
 		3609914919F1AAA1004BC4AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3690F5ED19F9B2D7009CF5F7 /* HypeTrackCell.swift */,
 				360990D419F1A736004BC4AF /* DownloadsViewController.swift */,
 				369D18401A0C5E5500334F09 /* InboxViewController.swift */,
 				369D18421A0C5E9B00334F09 /* TrashViewController.swift */,
 				369D18441A0C5EA300334F09 /* FavoritesViewController.swift */,
+				3690F5ED19F9B2D7009CF5F7 /* HypeTrackCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
