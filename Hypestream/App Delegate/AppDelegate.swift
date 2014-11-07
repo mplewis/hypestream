@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         println("Fetching in background...")
-        Scraper.addNewTracksToDB(context: self.managedObjectContext!, onSuccess: { (added, skipped, errors) -> Void in
+        Scraper.addNewTracksToDB({ (added, skipped, errors) -> Void in
             for track in added {
                 println("Added track: \(track.artist) - \(track.title)")
             }

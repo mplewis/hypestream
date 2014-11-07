@@ -80,8 +80,8 @@ class Scraper {
     
     // MARK: - Inserting Scraped Data into DB
     
-    class func insertTrackObjFromJSON(rawTrack: JSON, context: NSManagedObjectContext,
-                                      onTrack: (Track) -> Void, onError: (NSError) -> Void) {
+    class func insertTrackObjFromJSON(rawTrack: JSON, onTrack: (Track) -> Void, onError: (NSError) -> Void) {
+        let context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
         let idOp = rawTrack["id"].asString
         let keyOp = rawTrack["key"].asString
         let artistOp = rawTrack["artist"].asString
@@ -113,9 +113,8 @@ class Scraper {
         }
     }
     
-    class func addNewTracksToDB(#context: NSManagedObjectContext,
-                                onSuccess: (added: [Track], skipped: [Track], errors: [NSError]) -> Void,
-                                onError: (NSError) -> Void) {
+    class func addNewTracksToDB(onSuccess: (added: [Track], skipped: [Track], errors: [NSError]) -> Void, onError: (NSError) -> Void) {
+        let context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
         Scraper.getPopularTracks({ jsonTracks in
             var added = [Track]()
             var skipped = [Track]()
@@ -148,7 +147,7 @@ class Scraper {
                             skippedLock.unlock()
                         } else {
                             let sem = dispatch_semaphore_create(0)
-                            Scraper.insertTrackObjFromJSON(jsonTrack, context: context, onTrack: { track in
+                            Scraper.insertTrackObjFromJSON(jsonTrack, onTrack: { track in
                                 dispatch_semaphore_signal(sem)
                                 addedLock.lock()
                                 added.append(track)
