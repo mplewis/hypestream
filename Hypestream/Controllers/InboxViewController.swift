@@ -8,28 +8,70 @@
 
 import UIKit
 
-class InboxViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - Interface Builder
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Class Properties
+    
+    var tracks: [Track] = [Track]() {
+        didSet {
+            tableView.reloadData()
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.registerNib(UINib(nibName: "HypeTrackCell", bundle: nil), forCellReuseIdentifier: "HypeTrackCell")
+        loadTracksFromDB()
     }
-    */
+    
+    // MARK: - UITableViewDataSource
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tracks.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("HypeTrackCell") as HypeTrackCell
+        
+        // Clear the cell's progress bar
+        cell.resetProgress()
+        
+        // Fill the cell with data
+        let track = tracks[indexPath.row]
+        track.trackDownloadDelegate = cell
+        cell.artist = track.artist
+        cell.title = track.title
+        cell.loading = false
+        
+        return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        let row = tableView.cellForRowAtIndexPath(indexPath) as HypeTrackCell
+        let track = tracks[indexPath.row]
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    // MARK: - Functionality
+    
+    func loadTracksFromDB() {
+        let results = Helper.getTracksWithState(.Inbox)
+        if let error = results.error {
+            println(error.localizedDescription)
+            dispatch_async(dispatch_get_main_queue(), {
+                SVProgressHUD.showErrorWithStatus("Couldn't access DB")
+            })
+        } else {
+            tracks = results.tracks!
+        }
+    }
 
 }
