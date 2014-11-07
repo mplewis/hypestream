@@ -20,7 +20,7 @@ protocol TrackDownloadDelegate {
 // MARK: - Custom Types
 
 enum TrackState: Int {
-    case NotDownloaded = 1, Downloading, DownloadFailed, Inbox, Favorite, Trash, Deleted
+    case ToDownload = 1, Inbox, Favorite, Trash, Deleted
 }
 
 class Track: NSManagedObject {

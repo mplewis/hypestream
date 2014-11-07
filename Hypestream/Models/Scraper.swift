@@ -98,7 +98,7 @@ class Scraper {
                 track.artist = artist
                 track.title = title
                 track.source_url = url
-                track.state = .NotDownloaded
+                track.state = .ToDownload
                 var error: NSError?
                 context.save(&error)
                 if (error == nil) {

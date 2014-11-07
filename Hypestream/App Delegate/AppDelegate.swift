@@ -9,10 +9,25 @@
 import UIKit
 import CoreData
 
+// MARK: - BackgroundDownloadProgress Protocol
+
+@objc protocol DownloadProgressDelegate {
+    optional func didMoveTrackToInbox(track: Track)
+}
+
+// MARK: - AppDelegate
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDelegate {
 
     var window: UIWindow?
+    
+    lazy var bkgSession: NSURLSession = {
+        let bkgConfig = NSURLSessionConfiguration.backgroundSessionConfiguration("com.kesdev.Hypestream")
+        return NSURLSession(configuration: bkgConfig, delegate: self, delegateQueue: nil)
+    }()
+    
+    var downloadProgressDelegate: DownloadProgressDelegate?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         println("Documents path: \(documentsPath)")
@@ -20,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+    
+    // MARK: - Background Fetch
 
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         println("Fetching in background...")
@@ -43,6 +60,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }, onError: { (error) -> Void in
             completionHandler(.Failed)
         })
+    }
+    
+    func downloadTrack(track: Track) {
+        track.downloadProgress = 0
+        track.downloadInProgress = true
+        if let url = NSURL(string: track.source_url) {
+            let task = self.bkgSession.downloadTaskWithURL(url)
+            task.taskDescription = track.hypem_id
+            task.resume()
+        } else {
+            println("Couldn't create NSURL from \(track.source_url)")
+        }
+    }
+    
+    // MARK: - NSURLSessionDownloadDelegate
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        let taskId = downloadTask.taskDescription
+        let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+        println("\(taskId): \(progress)")
+        let results = Helper.getTracksWithId(taskId)
+        if let error = results.error {
+            println(error.localizedDescription)
+        } else {
+            let track = results.tracks![0]
+            track.downloadInProgress = true
+            track.downloadProgress = progress
+        }
+    }
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        println("\(downloadTask): \(fileOffset): \(expectedTotalBytes)")
+    }
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL source: NSURL) {
+        let taskId = downloadTask.taskDescription
+        println("\(taskId): done -> \(source)")
+        let fileManager = NSFileManager.defaultManager()
+        let results = Helper.getTracksWithId(taskId)
+        if let error = results.error {
+            // Error getting track with ID = task ID.
+            println(error.localizedDescription)
+            // Try to delete downloaded tmp file. We don't care if the deletion of a temp file fails.
+            fileManager.removeItemAtURL(source, error: nil)
+        } else {
+            let track = results.tracks![0]
+            track.downloadInProgress = false
+            track.downloadProgress = 1
+            let destString = documentsPath.stringByAppendingPathComponent("\(track.hypem_id).mp3")
+            if let dest = NSURL(fileURLWithPath: destString) {
+                println("\(taskId): moving -> \(dest)")
+                var fileError: NSError?
+                fileManager.copyItemAtURL(source, toURL: dest, error: &fileError)
+                if let error = fileError {
+                    // Error moving file to Documents folder.
+                    println(error.localizedDescription)
+                    // Try to delete downloaded tmp file. We don't care if the deletion of a temp file fails.
+                    fileManager.removeItemAtURL(source, error: nil)
+                } else {
+                    track.local_file_url = destString
+                    track.state = .Inbox
+                    println("\(taskId): moved -> \(dest)")
+                    var dbError: NSError?
+                    (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!.save(&dbError)
+                    if (dbError != nil) {
+                        println(dbError!.localizedDescription)
+                    }
+                    self.downloadProgressDelegate?.didMoveTrackToInbox?(track)
+                }
+            } else {
+                println("Couldn't convert dest to URL: \(destString)")
+            }
+        }
     }
     
     // MARK: - Core Data stack
