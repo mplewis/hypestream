@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 let queue = NSOperationQueue.mainQueue()
+let requestTimeout = 3.0
 
 class Scraper {
     
@@ -18,8 +19,9 @@ class Scraper {
     class func getPopularTracks(onTracks: ([JSON]) -> Void, onError: (NSError) -> Void) {
         let homeUrl = NSURL(string: "http://hypem.com/popular/1")!
         let bundleIdent = NSBundle.mainBundle().bundleIdentifier!
+        let request = NSURLRequest(URL: homeUrl, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: requestTimeout)
         
-        NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: homeUrl), queue: queue) { (response, htmlData, error) in
+        NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response, htmlData, error) in
             if (error != nil) {
                 onError(error); return
             }
@@ -48,6 +50,7 @@ class Scraper {
     class func getSourceURLForTrack(#id: String, key: String, onURL: (String) -> Void, onError: (NSError) -> Void) {
         let mediaUrl = NSURL(string: "http://hypem.com/serve/source/\(id)/\(key)")!
         let mediaRequest = NSMutableURLRequest(URL: mediaUrl)
+        mediaRequest.timeoutInterval = requestTimeout
         mediaRequest.HTTPMethod = "POST"
         
         NSURLConnection.sendAsynchronousRequest(mediaRequest, queue: queue) { (response, rawJsonData, error) in
