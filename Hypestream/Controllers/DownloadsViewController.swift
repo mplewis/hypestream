@@ -88,8 +88,7 @@ class DownloadsViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Functionality
 
     func loadTracksFromDB() {
-        let predicate = NSPredicate(format: "state_raw = %i", TrackState.ToDownload.rawValue)
-        let results = Helper.getTracksWithPredicate(predicate)
+        let results = Helper.getTracksWithState(.ToDownload)
         if let error = results.error {
             println(error.localizedDescription)
             dispatch_async(dispatch_get_main_queue(), {

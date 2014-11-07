@@ -39,6 +39,10 @@ class Helper {
         return getTracksWithPredicate(NSPredicate(format: "hypem_id = %@", id))
     }
     
+    class func getTracksWithState(state: TrackState) -> (tracks: [Track]?, error: NSError?) {
+        return getTracksWithPredicate(NSPredicate(format: "state_raw = %i", state.rawValue))
+    }
+    
     // MARK: - Error Builders
     
     class func makeError(description: String, code: Int) -> NSError {
