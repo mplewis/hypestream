@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="834-Fu-QEB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Downloads-->
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eRh-Cn-nCo">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <sections/>
                                 <connections>
@@ -28,11 +29,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="eRh-Cn-nCo" secondAttribute="bottom" id="EgE-an-0bM"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="eRh-Cn-nCo" secondAttribute="bottom" constant="-49" id="EgE-an-0bM"/>
                             <constraint firstAttribute="trailing" secondItem="eRh-Cn-nCo" secondAttribute="trailing" id="PjX-yB-7Ku"/>
+                            <constraint firstItem="eRh-Cn-nCo" firstAttribute="bottom" secondItem="kh9-bI-dsS" secondAttribute="bottomMargin" id="RZy-WO-lPV"/>
                             <constraint firstItem="eRh-Cn-nCo" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="aJ9-EV-Otm"/>
                             <constraint firstItem="eRh-Cn-nCo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="dwM-nf-KX6"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="EgE-an-0bM"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Downloads" id="TkB-vF-7ET"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
