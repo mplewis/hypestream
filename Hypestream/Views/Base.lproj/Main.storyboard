@@ -55,7 +55,7 @@
         <!--Trash-->
         <scene sceneID="9Ts-Mb-6NC">
             <objects>
-                <viewController id="6GZ-OL-pOQ" sceneMemberID="viewController">
+                <viewController id="6GZ-OL-pOQ" customClass="TrashViewController" customModule="Hypestream" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w7P-Z7-tzw"/>
                         <viewControllerLayoutGuide type="bottom" id="AGZ-Qe-Dj1"/>
@@ -88,7 +88,7 @@
         <!--Inbox-->
         <scene sceneID="fUw-3h-zIE">
             <objects>
-                <viewController id="fhP-ca-cGB" sceneMemberID="viewController">
+                <viewController id="fhP-ca-cGB" customClass="InboxViewController" customModule="Hypestream" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3qH-h4-IqI"/>
                         <viewControllerLayoutGuide type="bottom" id="K5F-LI-zYA"/>
@@ -215,7 +215,7 @@
         <!--Favorites-->
         <scene sceneID="mjB-36-vAK">
             <objects>
-                <viewController id="thd-aB-cTq" sceneMemberID="viewController">
+                <viewController id="thd-aB-cTq" customClass="FavoritesViewController" customModule="Hypestream" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xgo-wl-Ffi"/>
                         <viewControllerLayoutGuide type="bottom" id="eWS-og-bzt"/>

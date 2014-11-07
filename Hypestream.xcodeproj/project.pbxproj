@@ -36,6 +36,9 @@
 		3690F66F19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65B19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.m */; };
 		3690F67019FA1181009CF5F7 /* M13ProgressViewSegmentedRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65D19FA1181009CF5F7 /* M13ProgressViewSegmentedRing.m */; };
 		3690F67119FA1181009CF5F7 /* M13ProgressViewStripedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3690F65F19FA1181009CF5F7 /* M13ProgressViewStripedBar.m */; };
+		369D18411A0C5E5500334F09 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369D18401A0C5E5500334F09 /* InboxViewController.swift */; };
+		369D18431A0C5E9B00334F09 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369D18421A0C5E9B00334F09 /* TrashViewController.swift */; };
+		369D18451A0C5EA300334F09 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369D18441A0C5EA300334F09 /* FavoritesViewController.swift */; };
 		36D96B3119F6AE5700E2BB92 /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D96B3019F6AE5700E2BB92 /* Scraper.swift */; };
 		36D96B3319F6B40200E2BB92 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D96B3219F6B40200E2BB92 /* Helper.swift */; };
 /* End PBXBuildFile section */
@@ -116,6 +119,9 @@
 		3690F65E19FA1181009CF5F7 /* M13ProgressViewStripedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewStripedBar.h; sourceTree = "<group>"; };
 		3690F65F19FA1181009CF5F7 /* M13ProgressViewStripedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewStripedBar.m; sourceTree = "<group>"; };
 		3690F67319FA11ED009CF5F7 /* Hypestream-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hypestream-Bridging-Header.h"; sourceTree = "<group>"; };
+		369D18401A0C5E5500334F09 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
+		369D18421A0C5E9B00334F09 /* TrashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
+		369D18441A0C5EA300334F09 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		36D96B3019F6AE5700E2BB92 /* Scraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scraper.swift; path = Models/Scraper.swift; sourceTree = "<group>"; };
 		36D96B3219F6B40200E2BB92 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = Models/Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,8 +206,11 @@
 		3609914919F1AAA1004BC4AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				360990D419F1A736004BC4AF /* DownloadsViewController.swift */,
 				3690F5ED19F9B2D7009CF5F7 /* HypeTrackCell.swift */,
+				360990D419F1A736004BC4AF /* DownloadsViewController.swift */,
+				369D18401A0C5E5500334F09 /* InboxViewController.swift */,
+				369D18421A0C5E9B00334F09 /* TrashViewController.swift */,
+				369D18441A0C5EA300334F09 /* FavoritesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -434,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3690F66719FA1181009CF5F7 /* M13ProgressViewFilteredImage.m in Sources */,
+				369D18431A0C5E9B00334F09 /* TrashViewController.swift in Sources */,
 				3690F66C19FA1181009CF5F7 /* M13ProgressViewPie.m in Sources */,
 				36D96B3119F6AE5700E2BB92 /* Scraper.swift in Sources */,
 				3690F66319FA1181009CF5F7 /* UINavigationController+M13ProgressViewBar.m in Sources */,
@@ -446,6 +456,7 @@
 				3690F66F19FA1181009CF5F7 /* M13ProgressViewSegmentedBar.m in Sources */,
 				3690F66419FA1181009CF5F7 /* M13ProgressView.m in Sources */,
 				36D96B3319F6B40200E2BB92 /* Helper.swift in Sources */,
+				369D18411A0C5E5500334F09 /* InboxViewController.swift in Sources */,
 				3690F66019FA1181009CF5F7 /* M13ProgressConsole.m in Sources */,
 				3690F66D19FA1181009CF5F7 /* M13ProgressViewRadiative.m in Sources */,
 				3690F66E19FA1181009CF5F7 /* M13ProgressViewRing.m in Sources */,
@@ -454,6 +465,7 @@
 				3690F66B19FA1181009CF5F7 /* M13ProgressViewMetroDotPolygon.m in Sources */,
 				3690F66619FA1181009CF5F7 /* M13ProgressViewBorderedBar.m in Sources */,
 				3690F66519FA1181009CF5F7 /* M13ProgressViewBar.m in Sources */,
+				369D18451A0C5EA300334F09 /* FavoritesViewController.swift in Sources */,
 				36644DCC1A020390009FA2BB /* Hypestream.xcdatamodeld in Sources */,
 				360990D319F1A736004BC4AF /* AppDelegate.swift in Sources */,
 				36644DD31A020A4A009FA2BB /* Track.swift in Sources */,
