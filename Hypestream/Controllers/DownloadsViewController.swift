@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSURLSessionDownloadDelegate {
+class DownloadsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSURLSessionDownloadDelegate {
 
     // MARK: - Interface Builder
     

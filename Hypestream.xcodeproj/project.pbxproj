@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		360990D319F1A736004BC4AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360990D219F1A736004BC4AF /* AppDelegate.swift */; };
-		360990D519F1A736004BC4AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360990D419F1A736004BC4AF /* ViewController.swift */; };
+		360990D519F1A736004BC4AF /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360990D419F1A736004BC4AF /* DownloadsViewController.swift */; };
 		360990D819F1A736004BC4AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 360990D619F1A736004BC4AF /* Main.storyboard */; };
 		360990DA19F1A736004BC4AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 360990D919F1A736004BC4AF /* Images.xcassets */; };
 		360990DD19F1A736004BC4AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 360990DB19F1A736004BC4AF /* LaunchScreen.xib */; };
@@ -67,7 +67,7 @@
 		360990CD19F1A736004BC4AF /* Hypestream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hypestream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		360990D119F1A736004BC4AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		360990D219F1A736004BC4AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		360990D419F1A736004BC4AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		360990D419F1A736004BC4AF /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		360990D719F1A736004BC4AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		360990D919F1A736004BC4AF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		360990DC19F1A736004BC4AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 		3609914919F1AAA1004BC4AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				360990D419F1A736004BC4AF /* ViewController.swift */,
+				360990D419F1A736004BC4AF /* DownloadsViewController.swift */,
 				3690F5ED19F9B2D7009CF5F7 /* HypeTrackCell.swift */,
 			);
 			path = Controllers;
@@ -438,7 +438,7 @@
 				36D96B3119F6AE5700E2BB92 /* Scraper.swift in Sources */,
 				3690F66319FA1181009CF5F7 /* UINavigationController+M13ProgressViewBar.m in Sources */,
 				3690F66819FA1181009CF5F7 /* M13ProgressViewImage.m in Sources */,
-				360990D519F1A736004BC4AF /* ViewController.swift in Sources */,
+				360990D519F1A736004BC4AF /* DownloadsViewController.swift in Sources */,
 				3690F66919FA1181009CF5F7 /* M13ProgressViewLetterpress.m in Sources */,
 				3690F67119FA1181009CF5F7 /* M13ProgressViewStripedBar.m in Sources */,
 				3690F66119FA1181009CF5F7 /* M13ProgressHUD.m in Sources */,

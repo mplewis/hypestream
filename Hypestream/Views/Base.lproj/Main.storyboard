@@ -8,7 +8,7 @@
         <!--Downloads-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Hypestream" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="DownloadsViewController" customModule="Hypestream" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -63,7 +63,19 @@
                     <view key="view" contentMode="scaleToFill" id="J7d-d8-LaX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="h0l-Q2-VAx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="h0l-Q2-VAx" firstAttribute="leading" secondItem="J7d-d8-LaX" secondAttribute="leading" id="CVK-ov-lpx"/>
+                            <constraint firstAttribute="trailing" secondItem="h0l-Q2-VAx" secondAttribute="trailing" id="Gxc-pa-b70"/>
+                            <constraint firstItem="h0l-Q2-VAx" firstAttribute="top" secondItem="J7d-d8-LaX" secondAttribute="top" id="aZe-AZ-p9Q"/>
+                            <constraint firstAttribute="bottom" secondItem="h0l-Q2-VAx" secondAttribute="bottom" id="us5-0u-MVe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Trash" id="Zhk-fQ-MLT"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -84,7 +96,27 @@
                     <view key="view" contentMode="scaleToFill" id="STg-Ka-vcl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-sk-p3M">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LIK-sk-p3M" firstAttribute="bottom" secondItem="STg-Ka-vcl" secondAttribute="bottomMargin" id="FOs-sy-JIA"/>
+                            <constraint firstItem="LIK-sk-p3M" firstAttribute="top" secondItem="STg-Ka-vcl" secondAttribute="topMargin" id="MH9-cm-zLB"/>
+                            <constraint firstItem="LIK-sk-p3M" firstAttribute="leading" secondItem="STg-Ka-vcl" secondAttribute="leadingMargin" constant="-16" id="ciH-nI-4TD"/>
+                            <constraint firstItem="LIK-sk-p3M" firstAttribute="leading" secondItem="STg-Ka-vcl" secondAttribute="leading" id="hZG-g1-5ON"/>
+                            <constraint firstAttribute="trailing" secondItem="LIK-sk-p3M" secondAttribute="trailing" id="lIB-Ga-hkh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LIK-sk-p3M" secondAttribute="trailing" constant="-16" id="oZj-GK-2Ze"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ciH-nI-4TD"/>
+                                <exclude reference="oZj-GK-2Ze"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Inbox" id="oaS-77-0E1"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -191,7 +223,19 @@
                     <view key="view" contentMode="scaleToFill" id="kUY-ml-0nt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mBT-4r-B7N">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="mBT-4r-B7N" secondAttribute="trailing" id="8qj-C7-UY7"/>
+                            <constraint firstAttribute="bottom" secondItem="mBT-4r-B7N" secondAttribute="bottom" id="ebh-Yw-Asw"/>
+                            <constraint firstItem="mBT-4r-B7N" firstAttribute="top" secondItem="kUY-ml-0nt" secondAttribute="top" id="evT-Ai-Qpk"/>
+                            <constraint firstItem="mBT-4r-B7N" firstAttribute="leading" secondItem="kUY-ml-0nt" secondAttribute="leading" id="xQI-aW-2v6"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="T5a-5H-5Dd"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
