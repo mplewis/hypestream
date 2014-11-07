@@ -34,12 +34,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.refreshControl.addTarget(self, action: Selector("refreshFeed"), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: Selector("scrapeAndReload"), forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(self.refreshControl)
         
         self.tableView.registerNib(UINib(nibName: "HypeTrackCell", bundle: nil), forCellReuseIdentifier: "HypeTrackCell")
-        
-        self.refreshFeed()
+
+        self.loadTracksFromDB()
     }
     
     // MARK: - UITableView
@@ -151,7 +151,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - Functionality
 
-    func refreshFeed() {
+    func loadTracksFromDB() {
         let predicate = NSPredicate(format: "state_raw = %i", TrackState.NotDownloaded.rawValue)
         let results = Helper.getTracksWithPredicate(predicate)
         if let error = results.error {
@@ -159,7 +159,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             self.tracks = results.tracks!
         }
-        self.refreshControl.endRefreshing()
+    }
+    
+    func scrapeAndReload() {
+        Scraper.addNewTracksToDB({ (added, skipped, errors) -> Void in
+            println("Added: \(added.count), skipped: \(skipped.count), errors: \(errors.count)")
+            self.loadTracksFromDB()
+            self.refreshControl.endRefreshing()
+        }, onError: { (error) -> Void in
+            println(error)
+            self.refreshControl.endRefreshing()
+        })
     }
     
     // MARK: - Helpers
