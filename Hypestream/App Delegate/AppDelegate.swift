@@ -32,7 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         println("Documents path: \(documentsPath)")
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-
+        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
+        SVProgressHUD.setBackgroundColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
         return true
     }
     

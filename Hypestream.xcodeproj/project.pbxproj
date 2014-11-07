@@ -39,6 +39,8 @@
 		369D18411A0C5E5500334F09 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369D18401A0C5E5500334F09 /* InboxViewController.swift */; };
 		369D18431A0C5E9B00334F09 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369D18421A0C5E9B00334F09 /* TrashViewController.swift */; };
 		369D18451A0C5EA300334F09 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369D18441A0C5EA300334F09 /* FavoritesViewController.swift */; };
+		369D184B1A0CA56900334F09 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 369D18481A0CA56900334F09 /* SVProgressHUD.bundle */; };
+		369D184C1A0CA56900334F09 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 369D184A1A0CA56900334F09 /* SVProgressHUD.m */; };
 		36D96B3119F6AE5700E2BB92 /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D96B3019F6AE5700E2BB92 /* Scraper.swift */; };
 		36D96B3319F6B40200E2BB92 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D96B3219F6B40200E2BB92 /* Helper.swift */; };
 /* End PBXBuildFile section */
@@ -122,6 +124,10 @@
 		369D18401A0C5E5500334F09 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		369D18421A0C5E9B00334F09 /* TrashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		369D18441A0C5EA300334F09 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		369D18471A0CA56900334F09 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		369D18481A0CA56900334F09 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		369D18491A0CA56900334F09 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		369D184A1A0CA56900334F09 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		36D96B3019F6AE5700E2BB92 /* Scraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scraper.swift; path = Models/Scraper.swift; sourceTree = "<group>"; };
 		36D96B3219F6B40200E2BB92 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = Models/Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -245,6 +251,7 @@
 		3651ED9319F43B8F00F94C28 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				369D18461A0CA56800334F09 /* SVProgressHUD */,
 				3690F63719FA1181009CF5F7 /* M13ProgressSuite */,
 				3651ED9419F43B9C00F94C28 /* json.swift */,
 			);
@@ -335,6 +342,17 @@
 			path = ProgressViews;
 			sourceTree = "<group>";
 		};
+		369D18461A0CA56800334F09 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				369D18471A0CA56900334F09 /* SVProgressHUD-Prefix.pch */,
+				369D18481A0CA56900334F09 /* SVProgressHUD.bundle */,
+				369D18491A0CA56900334F09 /* SVProgressHUD.h */,
+				369D184A1A0CA56900334F09 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -421,6 +439,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				369D184B1A0CA56900334F09 /* SVProgressHUD.bundle in Resources */,
 				360990D819F1A736004BC4AF /* Main.storyboard in Resources */,
 				3690F5EC19F9B24B009CF5F7 /* HypeTrackCell.xib in Resources */,
 				360990DD19F1A736004BC4AF /* LaunchScreen.xib in Resources */,
@@ -459,6 +478,7 @@
 				369D18411A0C5E5500334F09 /* InboxViewController.swift in Sources */,
 				3690F66019FA1181009CF5F7 /* M13ProgressConsole.m in Sources */,
 				3690F66D19FA1181009CF5F7 /* M13ProgressViewRadiative.m in Sources */,
+				369D184C1A0CA56900334F09 /* SVProgressHUD.m in Sources */,
 				3690F66E19FA1181009CF5F7 /* M13ProgressViewRing.m in Sources */,
 				3690F66219FA1181009CF5F7 /* UIImage+ImageEffects.m in Sources */,
 				3690F5EE19F9B2D7009CF5F7 /* HypeTrackCell.swift in Sources */,

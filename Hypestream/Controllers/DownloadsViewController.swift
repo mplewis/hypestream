@@ -92,6 +92,9 @@ class DownloadsViewController: UIViewController, UITableViewDelegate, UITableVie
         let results = Helper.getTracksWithPredicate(predicate)
         if let error = results.error {
             println(error.localizedDescription)
+            dispatch_async(dispatch_get_main_queue(), {
+                SVProgressHUD.showErrorWithStatus("Couldn't access DB")
+            })
         } else {
             self.tracks = results.tracks!
         }
@@ -103,7 +106,10 @@ class DownloadsViewController: UIViewController, UITableViewDelegate, UITableVie
             self.loadTracksFromDB()
             self.refreshControl.endRefreshing()
         }, onError: { (error) -> Void in
-            println(error)
+            println(error.localizedDescription)
+            dispatch_async(dispatch_get_main_queue(), {
+                SVProgressHUD.showErrorWithStatus("Couldn't fetch tracks")
+            })
             self.refreshControl.endRefreshing()
         })
     }

@@ -11,5 +11,6 @@
 
 #include "M13ProgressView.h"
 #include "M13ProgressViewBar.h"
+#include "SVProgressHUD.h"
 
 #endif
