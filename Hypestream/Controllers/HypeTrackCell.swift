@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HypeTrackCell: UITableViewCell {
+class HypeTrackCell: UITableViewCell, TrackDownloadDelegate {
     
     // MARK: - Interface Builder
     
@@ -49,9 +49,28 @@ class HypeTrackCell: UITableViewCell {
     
     // MARK: - Callable helper functions
     
+    func setProgressNow(progress: Float) {
+        self.progressBar.setProgress(CGFloat(progress), animated: false)
+        self.progress = progress
+    }
+    
     func resetProgress() {
-        self.progressBar.setProgress(0, animated: false)
-        self.progress = 0
+        self.setProgressNow(0)
+    }
+    
+    // MARK: - TrackDownloadDelegate functions
+    
+    func trackDidStartDownloading(track: Track) {
+        self.resetProgress()
+        self.loading = true
+    }
+    
+    func trackDidFinishDownloading(track: Track) {
+        self.loading = false
+    }
+    
+    func trackDidUpdateProgress(track: Track, progress: Float) {
+        self.progress = progress
     }
 
 }

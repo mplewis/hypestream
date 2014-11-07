@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - Class Properties
 
-    var tracks: [JSON] = [JSON]() {
+    var tracks: [Track] = [Track]() {
         didSet {
             self.tableView.reloadData()
         }
@@ -50,33 +50,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("HypeTrackCell") as HypeTrackCell
+        
+        // Clear the cell's progress bar
+        cell.resetProgress()
+        
+        // Fill the cell with data
         let track = tracks[indexPath.row]
-        if let artist = track["artist"].asString {
-            cell.artist = artist
-        }
-        if let title = track["song"].asString {
-            cell.title = title
-        }
+        track.trackDownloadDelegate = cell
+        cell.artist = track.artist
+        cell.title = track.title
+        cell.setProgressNow(track.downloadProgress)
+        cell.loading = track.downloadInProgress
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let row = tableView.cellForRowAtIndexPath(indexPath) as HypeTrackCell
-        row.loading = true
-        row.userInteractionEnabled = false
-        
         let track = tracks[indexPath.row]
-
-        if let id = track["id"].asString {
-            if let key = track["key"].asString {
-                self.downloadTrack(id: id, key: key)
-            } else {
-                println("No key for track: \(track)")
-            }
+        track.downloadProgress = 0
+        track.downloadInProgress = true
+        if let url = NSURL(string: track.source_url) {
+            let task = self.bkgSession.downloadTaskWithURL(url)
+            task.taskDescription = track.hypem_id
+            task.resume()
         } else {
-            println("No id for track: \(track)")
+            println("Couldn't create NSURL from \(track.source_url)")
         }
-        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
@@ -86,59 +86,54 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let taskId = downloadTask.taskDescription
         let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
         println("\(taskId): \(progress)")
-        if let cell = cellWithTrackId(taskId) {
-            cell.loading = true
-            cell.progress = progress
+        let results = Helper.getTracksWithId(taskId)
+        if let error = results.error {
+            println(error.localizedDescription)
+        } else {
+            let track = results.tracks![0]
+            track.downloadInProgress = true
+            track.downloadProgress = progress
         }
     }
     
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64,
-                    expectedTotalBytes: Int64) {
-            println("\(downloadTask): \(fileOffset): \(expectedTotalBytes)")
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        println("\(downloadTask): \(fileOffset): \(expectedTotalBytes)")
     }
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
-        println("Done: \(downloadTask) -> \(location)")
         let taskId = downloadTask.taskDescription
-        if let cell = cellWithTrackId(taskId) {
-            cell.loading = false
-            cell.progress = 1
+        println("\(taskId): done -> \(location)")
+        let fileManager = NSFileManager.defaultManager()
+        let results = Helper.getTracksWithId(taskId)
+        if let error = results.error {
+            // Error getting track with ID = task ID. Delete downloaded tmp file.
+            println(error.localizedDescription)
+            var fileError: NSError?
+            fileManager.removeItemAtURL(location, error: &fileError)
+            if (fileError != nil) {
+                println(fileError!.localizedDescription)
+            }
+        } else {
+            let track = results.tracks![0]
+            track.downloadInProgress = false
+            track.downloadProgress = 1
+            // TODO: Copy track to destination
+            // TODO: Set track file location
+            // TODO: Set track status to Inbox
         }
     }
     
     // MARK: - Functionality
 
     func refreshFeed() {
-        Scraper.getPopularTracks({ tracks in
-            self.refreshControl.endRefreshing()
-            self.tracks = tracks
-        }, onError: { error in
-            self.refreshControl.endRefreshing()
-            println("Error while refreshing feed: \(error.localizedDescription)")
-        })
-    }
-    
-    func downloadTrack(#id: String, key: String) {
-        println("Retrieving track: \(id): \(key)")
-        Scraper.getSourceURLForTrack(id: id, key: key, onURL: { (url) -> Void in
-            if let url = NSURL(string: url) {
-                let task = self.bkgSession.downloadTaskWithURL(url)
-                task.taskDescription = id
-                task.resume()
-            } else {
-                println("Couldn't create NSURL from \(url)")
-            }
-        }) { (error) -> Void in
-            println(error)
+        let predicate = NSPredicate(format: "state_raw = %i", TrackState.NotDownloaded.rawValue)
+        let results = Helper.getTracksWithPredicate(predicate)
+        if let error = results.error {
+            println(error.localizedDescription)
+        } else {
+            self.tracks = results.tracks!
         }
+        self.refreshControl.endRefreshing()
     }
-    
-    func cellWithTrackId(id: String) -> HypeTrackCell? {
-        for (row, track) in enumerate(tracks) {
-            if (track["id"].asString == id) {
-                return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? HypeTrackCell
-            }
-        }
-        return nil
-    }
+
 }

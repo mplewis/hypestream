@@ -12,6 +12,9 @@ import CoreData
 let queue = NSOperationQueue.mainQueue()
 
 class Scraper {
+    
+    // MARK: - Web Scraping
+    
     class func getPopularTracks(onTracks: ([JSON]) -> Void, onError: (NSError) -> Void) {
         let homeUrl = NSURL(string: "http://hypem.com/popular/1")!
         let bundleIdent = NSBundle.mainBundle().bundleIdentifier!
@@ -74,6 +77,8 @@ class Scraper {
             }
         }
     }
+    
+    // MARK: - Inserting Scraped Data into DB
     
     class func insertTrackObjFromJSON(rawTrack: JSON, context: NSManagedObjectContext,
                                       onTrack: (Track) -> Void, onError: (NSError) -> Void) {
