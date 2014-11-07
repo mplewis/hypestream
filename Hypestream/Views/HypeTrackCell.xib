@@ -13,15 +13,6 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K6e-33-A8p" id="Asw-Wj-Fde">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSv-xr-Jzd">
-                        <rect key="frame" x="8" y="21" width="304" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="fS5-IQ-IKt"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sd7-IZ-LAt">
                         <rect key="frame" x="8" y="2" width="304" height="28"/>
                         <constraints>
@@ -31,8 +22,39 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSv-xr-Jzd">
+                        <rect key="frame" x="8" y="21" width="304" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="fS5-IQ-IKt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxa-M1-eRd">
+                        <rect key="frame" x="248" y="2" width="64" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="MHK-0k-NxK"/>
+                            <constraint firstAttribute="width" constant="64" id="QEW-2i-o4k"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="jxm-rX-w5i"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="days ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85V-z9-1sl">
+                        <rect key="frame" x="248" y="21" width="64" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="6VV-uz-6FU"/>
+                            <constraint firstAttribute="width" constant="64" id="IZi-OS-6lv"/>
+                            <constraint firstAttribute="height" constant="20" id="ctt-7u-Dph"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nq-zF-pFh" customClass="M13ProgressViewBar">
-                        <rect key="frame" x="0.0" y="41.5" width="320" height="1"/>
+                        <rect key="frame" x="0.0" y="42" width="320" height="1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="pdU-3j-Rv6"/>
@@ -40,9 +62,12 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="sxa-M1-eRd" firstAttribute="top" secondItem="Asw-Wj-Fde" secondAttribute="top" constant="2" id="5Gd-tX-kgo"/>
                     <constraint firstItem="3Nq-zF-pFh" firstAttribute="leading" secondItem="Asw-Wj-Fde" secondAttribute="leadingMargin" constant="-8" id="5iz-cE-JdJ"/>
                     <constraint firstItem="sd7-IZ-LAt" firstAttribute="trailing" secondItem="Asw-Wj-Fde" secondAttribute="trailingMargin" id="6sl-a7-Jcl"/>
                     <constraint firstItem="zSv-xr-Jzd" firstAttribute="trailing" secondItem="Asw-Wj-Fde" secondAttribute="trailingMargin" id="E8s-Nx-ZJS"/>
+                    <constraint firstAttribute="trailing" secondItem="sxa-M1-eRd" secondAttribute="trailing" constant="8" id="Gac-eq-n0d"/>
+                    <constraint firstItem="3Nq-zF-pFh" firstAttribute="top" secondItem="85V-z9-1sl" secondAttribute="bottom" constant="1" id="HB1-Xu-eGV"/>
                     <constraint firstAttribute="bottomMargin" secondItem="3Nq-zF-pFh" secondAttribute="bottom" constant="-7" id="Hnz-ck-e5y"/>
                     <constraint firstAttribute="trailing" secondItem="sd7-IZ-LAt" secondAttribute="trailing" id="Jdq-1I-VTO"/>
                     <constraint firstItem="sd7-IZ-LAt" firstAttribute="top" secondItem="Asw-Wj-Fde" secondAttribute="topMargin" constant="-6" id="LMs-6n-K87"/>
@@ -52,6 +77,7 @@
                     <constraint firstItem="zSv-xr-Jzd" firstAttribute="leading" secondItem="Asw-Wj-Fde" secondAttribute="leading" id="ewU-MX-wXd"/>
                     <constraint firstAttribute="centerY" secondItem="sd7-IZ-LAt" secondAttribute="centerY" id="hfm-Rf-3QU"/>
                     <constraint firstAttribute="bottomMargin" secondItem="zSv-xr-Jzd" secondAttribute="bottom" constant="-6" id="kRm-wn-jsW"/>
+                    <constraint firstAttribute="trailing" secondItem="85V-z9-1sl" secondAttribute="trailing" constant="8" id="nI8-He-9d7"/>
                     <constraint firstItem="zSv-xr-Jzd" firstAttribute="leading" secondItem="Asw-Wj-Fde" secondAttribute="leadingMargin" id="tza-wu-sb8"/>
                     <constraint firstItem="sd7-IZ-LAt" firstAttribute="leading" secondItem="Asw-Wj-Fde" secondAttribute="leadingMargin" id="yqc-nY-Lgb"/>
                     <constraint firstAttribute="trailingMargin" secondItem="3Nq-zF-pFh" secondAttribute="trailing" constant="-8" id="zmH-45-FcI"/>
@@ -69,6 +95,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="artistLabel" destination="zSv-xr-Jzd" id="Sat-Qv-HtW"/>
+                <outlet property="daysAgoLabel" destination="85V-z9-1sl" id="W8V-Rv-Aza"/>
+                <outlet property="daysCountLabel" destination="sxa-M1-eRd" id="CKf-WL-PUm"/>
                 <outlet property="progressBar" destination="3Nq-zF-pFh" id="XTr-0o-NeI"/>
                 <outlet property="titleLabel" destination="sd7-IZ-LAt" id="ccq-ej-cyA"/>
             </connections>

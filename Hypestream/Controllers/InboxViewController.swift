@@ -48,6 +48,7 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.artist = track.artist
         cell.title = track.title
         cell.loading = false
+        cell.lastAccessed = track.last_accessed
         
         return cell
     }

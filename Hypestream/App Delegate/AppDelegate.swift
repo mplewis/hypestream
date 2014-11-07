@@ -122,6 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
                 } else {
                     track.local_file_url = destString
                     track.state = .Inbox
+                    track.last_accessed = NSDate()
                     println("\(taskId): moved -> \(dest)")
                     var dbError: NSError?
                     managedObjectContext!.save(&dbError)

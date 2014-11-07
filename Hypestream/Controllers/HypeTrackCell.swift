@@ -15,7 +15,9 @@ class HypeTrackCell: UITableViewCell, TrackDownloadDelegate {
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progressBar: M13ProgressViewBar!
-    
+    @IBOutlet weak var daysCountLabel: UILabel!
+    @IBOutlet weak var daysAgoLabel: UILabel!
+
     // MARK: - UITableViewCell
     
     override func awakeFromNib() {
@@ -24,7 +26,7 @@ class HypeTrackCell: UITableViewCell, TrackDownloadDelegate {
         self.loading = false
     }
 
-    // MARK: - Settable properties
+    // MARK: - All tracks
     
     var artist: String = "" {
         didSet {
@@ -36,6 +38,9 @@ class HypeTrackCell: UITableViewCell, TrackDownloadDelegate {
             self.titleLabel.text = self.title
         }
     }
+    
+    // MARK: - Download progress
+    
     var loading: Bool = false {
         didSet {
             self.progressBar.hidden = !self.loading
@@ -44,6 +49,24 @@ class HypeTrackCell: UITableViewCell, TrackDownloadDelegate {
     var progress: Float = 0 {
         didSet {
             self.progressBar.setProgress(CGFloat(self.progress), animated: true)
+        }
+    }
+    
+    // MARK: - Last Accessed
+    
+    var lastAccessed: NSDate? {
+        didSet {
+            if (lastAccessed == nil) {
+                daysCountLabel.hidden = true
+                daysAgoLabel.hidden = true
+            } else {
+                let seconds = Int(Double(-lastAccessed!.timeIntervalSinceNow))
+                let minutes = seconds / 60
+                daysCountLabel.text = String(minutes)
+                daysAgoLabel.text = "minutes ago"
+                daysCountLabel.hidden = false
+                daysAgoLabel.hidden = false
+            }
         }
     }
     
