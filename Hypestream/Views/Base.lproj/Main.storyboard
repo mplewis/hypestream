@@ -174,7 +174,7 @@
         <scene sceneID="dSy-Or-FFL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VpV-Dj-qDc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Inbox" id="swu-aZ-jPa"/>
+                    <tabBarItem key="tabBarItem" title="Inbox" image="inbox" id="swu-aZ-jPa"/>
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
@@ -195,7 +195,7 @@
         <scene sceneID="d4i-Kt-OPw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d4T-Bs-pGf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Trash" id="0UF-d9-afL"/>
+                    <tabBarItem key="tabBarItem" title="Trash" image="trash" id="0UF-d9-afL"/>
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
@@ -267,4 +267,8 @@
             <point key="canvasLocation" x="1922.5" y="1165.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="inbox" width="25" height="25"/>
+        <image name="trash" width="25" height="25"/>
+    </resources>
 </document>
