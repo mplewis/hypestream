@@ -100,26 +100,52 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println("\(downloadTask): \(fileOffset): \(expectedTotalBytes)")
     }
     
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL source: NSURL) {
         let taskId = downloadTask.taskDescription
-        println("\(taskId): done -> \(location)")
+        println("\(taskId): done -> \(source)")
         let fileManager = NSFileManager.defaultManager()
         let results = Helper.getTracksWithId(taskId)
         if let error = results.error {
-            // Error getting track with ID = task ID. Delete downloaded tmp file.
+            // Error getting track with ID = task ID.
             println(error.localizedDescription)
-            var fileError: NSError?
-            fileManager.removeItemAtURL(location, error: &fileError)
-            if (fileError != nil) {
-                println(fileError!.localizedDescription)
-            }
+            // Try to delete downloaded tmp file. We don't care if the deletion of a temp file fails.
+            fileManager.removeItemAtURL(source, error: nil)
         } else {
             let track = results.tracks![0]
             track.downloadInProgress = false
             track.downloadProgress = 1
-            // TODO: Copy track to destination
-            // TODO: Set track file location
-            // TODO: Set track status to Inbox
+            let destString = documentsPath.stringByAppendingPathComponent("\(track.hypem_id).mp3")
+            if let dest = NSURL(fileURLWithPath: destString) {
+                println("\(taskId): moving -> \(dest)")
+                var fileError: NSError?
+                fileManager.copyItemAtURL(source, toURL: dest, error: &fileError)
+                if let error = fileError {
+                    // Error moving file to Documents folder.
+                    println(error.localizedDescription)
+                    // Try to delete downloaded tmp file. We don't care if the deletion of a temp file fails.
+                    fileManager.removeItemAtURL(source, error: nil)
+                } else {
+                    track.local_file_url = destString
+                    track.state = .Inbox
+                    println("\(taskId): moved -> \(dest)")
+                    var dbError: NSError?
+                    (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!.save(&dbError)
+                    if (dbError != nil) {
+                        println(dbError!.localizedDescription)
+                    }
+                    if let index = self.indexForTrack(track) {
+                        let path = NSIndexPath(forRow: index, inSection: 0)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.tableView.beginUpdates()
+                            self.tracks.removeAtIndex(index)
+                            self.tableView.deleteRowsAtIndexPaths([path], withRowAnimation: .Fade)
+                            self.tableView.endUpdates()
+                        });
+                    }
+                }
+            } else {
+                println("Couldn't convert dest to URL: \(destString)")
+            }
         }
     }
     
@@ -134,6 +160,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.tracks = results.tracks!
         }
         self.refreshControl.endRefreshing()
+    }
+    
+    // MARK: - Helpers
+    
+    func indexForTrack(track: Track) -> Int? {
+        for (index, tableTrack) in enumerate(self.tracks) {
+            if (track == tableTrack) {
+                return index
+            }
+        }
+        return nil
     }
 
 }
