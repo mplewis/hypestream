@@ -35,6 +35,10 @@ class DownloadsViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.registerNib(UINib(nibName: "HypeTrackCell", bundle: nil), forCellReuseIdentifier: "HypeTrackCell")
 
         self.loadTracksFromDB()
+        self.refreshControl.beginRefreshing()
+        let newOffset = CGPointMake(0, -self.tableView.contentInset.top);
+        self.tableView.setContentOffset(newOffset, animated:true);
+        self.scrapeAndReload()
     }
     
     // MARK: - UITableView
