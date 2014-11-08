@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
         let taskId = downloadTask.taskDescription
         let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
         println("\(taskId): \(progress)")
-        let results = Helper.getTracksWithId(taskId)
+        let results = Helper.getTracksWithId(taskId, sortDescriptors: nil)
         if let error = results.error {
             println(error.localizedDescription)
         } else {
@@ -99,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
         let taskId = downloadTask.taskDescription
         println("\(taskId): done -> \(source)")
         let fileManager = NSFileManager.defaultManager()
-        let results = Helper.getTracksWithId(taskId)
+        let results = Helper.getTracksWithId(taskId, sortDescriptors: nil)
         if let error = results.error {
             // Error getting track with ID = task ID.
             println(error.localizedDescription)

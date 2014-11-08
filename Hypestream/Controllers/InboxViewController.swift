@@ -64,7 +64,8 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: - Functionality
     
     func loadTracksFromDB() {
-        let results = Helper.getTracksWithState(.Inbox)
+        let sortDesc = NSSortDescriptor(key: "last_accessed", ascending: false)
+        let results = Helper.getTracksWithState(.Inbox, sortDescriptors: [sortDesc])
         if let error = results.error {
             println(error.localizedDescription)
             dispatch_async(dispatch_get_main_queue(), {

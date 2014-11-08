@@ -15,12 +15,11 @@ class Helper {
     
     // MARK: - Core Data
     
-    class func getTracksWithPredicate(predicate: NSPredicate?) -> (tracks: [Track]?, error: NSError?) {
+    class func getTracksWithPredicate(predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> (tracks: [Track]?, error: NSError?) {
         let context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
         let request = NSFetchRequest(entityName: "Track")
-        if (predicate != nil) {
-            request.predicate = predicate
-        }
+        request.predicate = predicate
+        request.sortDescriptors = sortDescriptors
         var error: NSError?
         let resultsOp = context.executeFetchRequest(request, error: &error)
         if error != nil {
@@ -31,16 +30,16 @@ class Helper {
         return (tracks, nil)
     }
     
-    class func getAllTracks() -> (tracks: [Track]?, error: NSError?) {
-        return getTracksWithPredicate(nil)
+    class func getAllTracks(#sortDescriptors: [NSSortDescriptor]?) -> (tracks: [Track]?, error: NSError?) {
+        return getTracksWithPredicate(nil, sortDescriptors: sortDescriptors)
     }
     
-    class func getTracksWithId(id: String) -> (tracks: [Track]?, error: NSError?) {
-        return getTracksWithPredicate(NSPredicate(format: "hypem_id = %@", id))
+    class func getTracksWithId(id: String, sortDescriptors: [NSSortDescriptor]?) -> (tracks: [Track]?, error: NSError?) {
+        return getTracksWithPredicate(NSPredicate(format: "hypem_id = %@", id), sortDescriptors: sortDescriptors)
     }
     
-    class func getTracksWithState(state: TrackState) -> (tracks: [Track]?, error: NSError?) {
-        return getTracksWithPredicate(NSPredicate(format: "state_raw = %i", state.rawValue))
+    class func getTracksWithState(state: TrackState, sortDescriptors: [NSSortDescriptor]?) -> (tracks: [Track]?, error: NSError?) {
+        return getTracksWithPredicate(NSPredicate(format: "state_raw = %i", state.rawValue), sortDescriptors: sortDescriptors)
     }
     
     // MARK: - Error Builders
