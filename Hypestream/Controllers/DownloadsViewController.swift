@@ -19,6 +19,11 @@ class DownloadsViewController: UIViewController, UITableViewDelegate, UITableVie
     var tracks: [Track] = [Track]() {
         didSet {
             tableView.reloadData()
+            if (tracks.count > 0) {
+                navigationController!.tabBarItem.badgeValue = String(tracks.count)
+            } else {
+                navigationController!.tabBarItem.badgeValue = nil
+            }
         }
     }
     let refreshControl = UIRefreshControl()
