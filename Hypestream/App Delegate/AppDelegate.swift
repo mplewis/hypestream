@@ -152,6 +152,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
         }
     }
     
+    func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
+        println("NSURLSession invalidated")
+        let bkgConfig = NSURLSessionConfiguration.backgroundSessionConfiguration("com.kesdev.Hypestream")
+        self.bkgSession = NSURLSession(configuration: bkgConfig, delegate: self, delegateQueue: nil)
+    }
+    
     // MARK: - Core Data stack
     
     lazy var applicationDocumentsDirectory: NSURL = {
