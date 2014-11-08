@@ -10,7 +10,7 @@
 #define Hypestream_Hypestream_Bridging_Header_h
 
 #include "M13ProgressView.h"
-#include "M13ProgressViewBar.h"
+#include "M13ProgressViewPie.h"
 #include "SVProgressHUD.h"
 
 #endif

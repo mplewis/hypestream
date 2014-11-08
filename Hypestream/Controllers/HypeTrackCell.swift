@@ -14,7 +14,7 @@ class HypeTrackCell: UITableViewCell, TrackDownloadDelegate {
     
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var progressBar: M13ProgressViewBar!
+    @IBOutlet weak var progressBar: M13ProgressViewPie!
     @IBOutlet weak var daysCountLabel: UILabel!
     @IBOutlet weak var daysAgoLabel: UILabel!
 
@@ -22,7 +22,6 @@ class HypeTrackCell: UITableViewCell, TrackDownloadDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.progressBar.showPercentage = false
         self.loading = false
     }
 
