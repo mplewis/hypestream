@@ -62,8 +62,29 @@ class HypeTrackCell: UITableViewCell, TrackDownloadDelegate {
             } else {
                 let seconds = Int(Double(-lastAccessed!.timeIntervalSinceNow))
                 let minutes = seconds / 60
-                daysCountLabel.text = String(minutes)
-                daysAgoLabel.text = "minutes ago"
+                let hours = minutes / 60
+                let days = hours / 24
+                var unit: String
+                var count: Int
+                if seconds < 60 {
+                    unit = "second"
+                    count = seconds
+                } else if minutes < 60 {
+                    unit = "minute"
+                    count = minutes
+                } else if hours < 24 {
+                    unit = "hour"
+                    count = hours
+                } else {
+                    unit = "day"
+                    count = days
+                }
+                var plural = "s"
+                if (count == 1) {
+                    plural = ""
+                }
+                daysCountLabel.text = String(count)
+                daysAgoLabel.text = "\(unit)\(plural) ago"
                 daysCountLabel.hidden = false
                 daysAgoLabel.hidden = false
             }
