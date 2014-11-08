@@ -52,6 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
                 println("Error: \(error.userInfo)")
             }
             println("Done! Added \(added.count) tracks with \(errors.count) errors.")
+            
+            // Start tracks downloading in the background
+            self.downloadAllTracks()
 
             if (added.count > 0) {
                 completionHandler(.NewData)
@@ -72,6 +75,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLSessionDownloadDeleg
             task.resume()
         } else {
             println("Couldn't create NSURL from \(track.source_url)")
+        }
+    }
+    
+    func downloadAllTracks() {
+        let result = Helper.getTracksWithState(.ToDownload, sortDescriptors: nil)
+        if (result.error != nil) {
+            println(result.error!.localizedDescription)
+            return
+        }
+        println("Starting downloads for \(result.tracks!.count) tracks")
+        for track in result.tracks! {
+            downloadTrack(track)
         }
     }
     

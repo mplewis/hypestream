@@ -111,6 +111,7 @@ class DownloadsViewController: UIViewController, UITableViewDelegate, UITableVie
             println("Added: \(added.count), skipped: \(skipped.count), errors: \(errors.count)")
             self.loadTracksFromDB()
             self.refreshControl.endRefreshing()
+            self.appDelegate.downloadAllTracks()
         }, onError: { (error) -> Void in
             println(error.localizedDescription)
             dispatch_async(dispatch_get_main_queue(), {

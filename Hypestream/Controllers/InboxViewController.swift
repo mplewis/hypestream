@@ -21,11 +21,14 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
             tableView.reloadData()
         }
     }
+    let refreshControl = UIRefreshControl()
     
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.addTarget(self, action: Selector("loadTracksFromDB"), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl)
         tableView.registerNib(UINib(nibName: "HypeTrackCell", bundle: nil), forCellReuseIdentifier: "HypeTrackCell")
         loadTracksFromDB()
     }
@@ -74,6 +77,7 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             tracks = results.tracks!
         }
+        refreshControl.endRefreshing()
     }
 
 }
